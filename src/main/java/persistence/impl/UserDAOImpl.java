@@ -24,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, user.getNombre());
-			statement.setInt(2, user.getDinero());
+			statement.setInt(2, user.getPresupuesto());
 			statement.setDouble(3, user.getTiempoDisponible());
 			statement.setString(4, user.getAtraccionFavorita().name().toLowerCase());
 			int rows = statement.executeUpdate();
@@ -43,7 +43,7 @@ public class UserDAOImpl implements UserDAO {
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(3, user.getNombre());
-			statement.setInt(1, user.getDinero());
+			statement.setInt(1, user.getPresupuesto());
 			statement.setDouble(2, user.getTiempoDisponible());
 			int rows = statement.executeUpdate();
 

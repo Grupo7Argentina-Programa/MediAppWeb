@@ -23,7 +23,7 @@ public abstract class Promocion implements Mostrable, Comparable<Promocion> {
 		return this.costo;
 	}
 
-	public TipoDeAtraccion getTipoDeAtraccion() {
+	public TipoDeAtraccion getTipo() {
 		return this.tiposDeAtracciones;
 	}
 

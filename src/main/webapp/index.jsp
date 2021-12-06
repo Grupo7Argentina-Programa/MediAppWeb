@@ -16,12 +16,14 @@
 
 	<main class="container-fluid" style="padding-bottom: 30px;">
 
-		<h1 style="color: white">
-			Te damos la bienvenida,
-			<c:out value="${username}"/>
-			!
-		</h1>
-
+		<c:if test="${usuario != null}">
+			<h1 style="color: white">
+				Te damos la bienvenida,
+				<c:out value="${usuario.nombre}" />
+				!
+			</h1>
+		</c:if>
+		
 		<div id="carouselExampleInterval" class="carousel slide"
 			data-bs-ride="carousel">
 			<div class="carousel-inner"

@@ -97,10 +97,6 @@ public class Usuario implements Comparable<Usuario> {
 		return Objects.equals(nombre, other.nombre);
 	}
 
-	public int getDinero() {
-		return presupuesto;
-	}
-
 	public void setItinerario(Itinerario itinerario) {
 		this.itinerario = itinerario;
 	}
@@ -112,6 +108,10 @@ public class Usuario implements Comparable<Usuario> {
 	public boolean checkPassword(String password) {
 		// this.password en realidad es el hash del password
 		return Crypt.match(password, this.password);
+	}
+	
+	public boolean puedeComprar(Atraccion atraccion) {
+		return (atraccion.getCupo() >=1 && this.presupuesto >= atraccion.getCosto() && this.tiempoDisponible >= atraccion.getTiempoNecesario());
 	}
 
 }

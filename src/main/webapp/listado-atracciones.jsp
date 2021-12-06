@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="es">
 
@@ -30,36 +30,38 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${atracciones}" var="atraccion">
-					<tr>
-						<td>id</td>
-						<td><strong><c:out value="${atraccion.nombreDeAtraccion}"></c:out></strong>
-							<p>Descripción genérica</p></td>
-						<td><c:out value="${atraccion.costo}"></c:out></td>
-						<td><c:out value="${atraccion.tiempoNecesario}"></c:out></td>
-						<td><c:out value="${atraccion.cupo}"></c:out></td>
-						<td><c:out value="${atraccion.tipo}"></c:out></td>
+						<tr>
+							<td>id</td>
+							<td><strong><c:out
+										value="${atraccion.nombre}"></c:out></strong>
+								<p>Descripción genérica</p></td>
+							<td>$ <c:out value="${atraccion.costo}"></c:out></td>
+							<td><c:out value="${atraccion.tiempoNecesario}"></c:out> horas</td>
+							<td><c:out value="${atraccion.cupo}"></c:out></td>
+							<td><c:out value="${atraccion.tipo}"></c:out></td>
 
-						<td><c:if test="${user.admin}">
-								<a href="/turismo/attractions/edit.do?id=${atraccion.id}"
-									class="btn btn-light rounded-0" role="button"><i
-									class="bi bi-pencil-fill"></i></a>
-								<a href="/turismo/attractions/delete.do?id=${atraccion.id}"
-									class="btn btn-danger rounded" role="button"><i
-									class="bi bi-x-circle-fill"></i></a>
-							</c:if> <c:choose>
+							<td><c:if test="${user.admin}">
+									<a href="/turismo/attractions/edit.do?id=${atraccion.id}"
+										class="btn btn-light rounded-0" role="button"><i
+										class="bi bi-pencil-fill"></i></a>
+									<a href="/turismo/attractions/delete.do?id=${atraccion.id}"
+										class="btn btn-danger rounded" role="button"><i
+										class="bi bi-x-circle-fill"></i></a>
+								</c:if> <c:choose>
 
-								<c:when
-									test="${user.canAfford(atraccion) && user.canAttend(attraction) && attraction.canHost(1)}">
-									<a href="/turismo/attractions/buy.do?id=${attraction.id}"
-										class="btn btn-success rounded" role="button">Comprar</a>
-								</c:when>
-								<c:otherwise>
-									<a href="#" class="btn btn-secondary rounded disabled"
-										role="button">No se puede comprar</a>
-								</c:otherwise>
-							</c:choose></td>
-					</tr>
-				</c:forEach>
+									<c:when
+										test="${usuario.puedeComprar(atraccion)}">
+										<a href="#"
+											class="btn btn-success rounded" role="button">Comprar</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#" class="btn btn-secondary rounded disabled"
+											role="button">No se puede comprar</a>
+									</c:otherwise> 
+							</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

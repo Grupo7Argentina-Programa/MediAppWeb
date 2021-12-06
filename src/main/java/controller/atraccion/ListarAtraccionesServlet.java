@@ -14,7 +14,7 @@ import model.TipoDeAtraccion;
 import model.Atraccion;
 import services.AtraccionService;
 
-@WebServlet("/listado-atracciones")
+@WebServlet("/listado-atracciones.do")
 public class ListarAtraccionesServlet extends HttpServlet implements Servlet {
 
 	private static final long serialVersionUID = -9191928759998728209L;
@@ -28,21 +28,10 @@ public class ListarAtraccionesServlet extends HttpServlet implements Servlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//List<Atraccion> atracciones = atraccionService.list();
-		
-		List<Atraccion> atracciones = new LinkedList<Atraccion>();
-		Atraccion mordor = new Atraccion("Mordor", 25, (double) 3, 4, TipoDeAtraccion.AVENTURA);
-		Atraccion moria = new Atraccion("Moria", 10, (double) 2, 6, TipoDeAtraccion.AVENTURA);
-		Atraccion bosqueNegro = new Atraccion("Bosque Negro", 3, (double) 4, 12, TipoDeAtraccion.AVENTURA);
-		Atraccion lothlorien = new Atraccion("Lothlóiren", 35, (double) 1, 30, TipoDeAtraccion.DEGUSTACION);
-		atracciones.add(lothlorien);
-		atracciones.add(bosqueNegro);
-		atracciones.add(moria);
-		atracciones.add(mordor);		
-		
+		List<Atraccion> atracciones = atraccionService.list();	
 		req.setAttribute("atracciones", atracciones);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("listado-atracciones.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listado-atracciones.jsp");
 		dispatcher.forward(req, resp);
 	}
 }

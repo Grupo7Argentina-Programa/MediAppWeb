@@ -3,7 +3,7 @@ package model;
 public class Porcentual extends Promocion {
 
 	public Porcentual(String nombreDePromo, int porcentajeDeDescuento, Atraccion a, Atraccion b) {
-		boolean tiposDistintos = a.getTipoDeAtraccion() != b.getTipoDeAtraccion();
+		boolean tiposDistintos = a.getTipo() != b.getTipo();
 
 		try {
 			if (nombreDePromo == "") {
@@ -15,7 +15,7 @@ public class Porcentual extends Promocion {
 			}
 
 			this.nombreDePromocion = nombreDePromo;
-			this.tiposDeAtracciones = a.getTipoDeAtraccion();
+			this.tiposDeAtracciones = a.getTipo();
 			this.costo = a.getCosto() + b.getCosto();
 			this.descuento = this.costo * porcentajeDeDescuento / 100;
 			this.costo -= this.descuento;

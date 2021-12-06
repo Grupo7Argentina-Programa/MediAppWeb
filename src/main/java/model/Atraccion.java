@@ -8,7 +8,7 @@ import persistence.common.DAOFactory;
 
 public class Atraccion implements Mostrable, Comparable<Atraccion> {
 
-	private String nombreDeAtraccion;
+	private String nombre;
 	private Integer costo;
 	private Double tiempoNecesario;
 	private int cupo;
@@ -18,7 +18,7 @@ public class Atraccion implements Mostrable, Comparable<Atraccion> {
 	public Atraccion(String nombre, Integer costo, Double tiempoNecesario, Integer cupo, TipoDeAtraccion tipo) {
 
 
-		this.nombreDeAtraccion = nombre;
+		this.nombre = nombre;
 		this.costo = costo;
 		this.tiempoNecesario = tiempoNecesario;
 		this.cupo = cupo;
@@ -26,7 +26,7 @@ public class Atraccion implements Mostrable, Comparable<Atraccion> {
 	}
 
 	public String getNombre() {
-		return nombreDeAtraccion;
+		return nombre;
 	}
 
 	public Integer getCosto() {
@@ -37,13 +37,13 @@ public class Atraccion implements Mostrable, Comparable<Atraccion> {
 		return tiempoNecesario;
 	}
 
-	public TipoDeAtraccion getTipoDeAtraccion() {
+	public TipoDeAtraccion getTipo() {
 		return tipo;
 	}
 
 	@Override
 	public String toString() {
-		return "\n" + nombreDeAtraccion + "\n Costo: " + costo + "\n Tiempo promedio requerido: " + tiempoNecesario
+		return "\n" + nombre + "\n Costo: " + costo + "\n Tiempo promedio requerido: " + tiempoNecesario
 				+ "\n Cupos: " + cupo + "\n Tipo de atracción: " + tipo + "\n ------------------------";
 	}
 
@@ -63,7 +63,7 @@ public class Atraccion implements Mostrable, Comparable<Atraccion> {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(costo, nombreDeAtraccion, tiempoNecesario, tipo);
+		return Objects.hash(costo, nombre, tiempoNecesario, tipo);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class Atraccion implements Mostrable, Comparable<Atraccion> {
 		if (getClass() != obj.getClass())
 			return false;
 		Atraccion other = (Atraccion) obj;
-		return Objects.equals(costo, other.costo) && Objects.equals(nombreDeAtraccion, other.nombreDeAtraccion)
+		return Objects.equals(costo, other.costo) && Objects.equals(nombre, other.nombre)
 				&& Objects.equals(tiempoNecesario, other.tiempoNecesario) && tipo == other.tipo;
 	}
 
@@ -99,15 +99,15 @@ public class Atraccion implements Mostrable, Comparable<Atraccion> {
 	}
 
 	public void setNombre(String nombre) {
-		this.nombreDeAtraccion = nombre;
+		this.nombre = nombre;
 	}
 	
 	public void setCupo(Integer cupo) {
 		this.cupo = cupo;
 	}
 	
-	public void setDuracion(Double duracion) {
-		this.tiempoNecesario = duracion;
+	public void setTiempoNecesario(Double tiempoNecesario) {
+		this.tiempoNecesario = tiempoNecesario;
 	}
 	
 	public void setCosto(Integer costo) {

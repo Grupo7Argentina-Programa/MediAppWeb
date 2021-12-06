@@ -27,14 +27,14 @@
 						class="card-img-top img-fluid w-50 rounded-circle" alt="...">
 					<div class="card-body">
 						<h5 class="card-title">
-							<c:out value="${username}"></c:out>
+							<c:out value="${usuario.nombre}"></c:out>
 						</h5>
 						<p class="card-text">Some quick example text to build on the
 							card title and make up the bulk of the card's content.</p>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">50 monedas</li>
-						<li class="list-group-item">6 horas</li>
+						<li class="list-group-item"><c:out value="${usuario.presupuesto}"></c:out> monedas</li>
+						<li class="list-group-item"><c:out value="${usuario.tiempoDisponible}"></c:out> horas</li>
 						<li class="list-group-item">Aventura</li>
 					</ul>
 					<div class="card-body">

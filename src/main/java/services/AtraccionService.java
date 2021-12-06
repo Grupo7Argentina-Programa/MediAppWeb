@@ -31,7 +31,7 @@ public class AtraccionService {
 
 		atraccion.setNombre(nombre);
 		atraccion.setCosto(costo);
-		atraccion.setDuracion(duracion);
+		atraccion.setTiempoNecesario(duracion);
 		atraccion.setCupo(cupo);
 
 		/*

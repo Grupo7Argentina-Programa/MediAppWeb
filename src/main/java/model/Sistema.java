@@ -51,7 +51,7 @@ public class Sistema {
 				}
 				while (user != null) {
 					System.out.println("Te damos la bienvenida, " + user.getNombre());
-					System.out.println("Tu saldo es de " + user.getDinero() + " monedas de oro");
+					System.out.println("Tu saldo es de " + user.getPresupuesto() + " monedas de oro");
 					System.out.println("Te quedan " + user.getTiempoDisponible() + " horas dispnibles");
 					System.out.println(
 							"\n 1) CAMBIAR USUARIO \n "
@@ -134,7 +134,7 @@ public class Sistema {
 
 		for (Mostrable elemento : listaAtracciones.descendingSet()) {
 
-			boolean tipoDeAtraccionFavorita = usuario.getAtraccionFavorita() == elemento.getTipoDeAtraccion();
+			boolean tipoDeAtraccionFavorita = usuario.getAtraccionFavorita() == elemento.getTipo();
 			boolean puedePagarlo = usuario.getPresupuesto() >= elemento.getCosto();
 			boolean tieneTiempo = usuario.getTiempoDisponible() >= elemento.getTiempoNecesario();
 			boolean estaEnItinerario = usuario.getItinerario().getAtraccionesAceptadas().contains(elemento);
@@ -149,7 +149,7 @@ public class Sistema {
 			boolean puedePagarlo = usuario.getPresupuesto() >= elemento.getCosto();
 			boolean tieneTiempo = usuario.getTiempoDisponible() >= elemento.getTiempoNecesario();
 			boolean estaEnItinerario = usuario.getItinerario().getAtraccionesAceptadas().contains(elemento);
-			boolean tipoDeAtraccionFavorita = usuario.getAtraccionFavorita() == elemento.getTipoDeAtraccion();
+			boolean tipoDeAtraccionFavorita = usuario.getAtraccionFavorita() == elemento.getTipo();
 
 			if (puedePagarlo && tieneTiempo && !tipoDeAtraccionFavorita && !estaEnItinerario) {
 				sugerencias.add(elemento);
@@ -167,7 +167,7 @@ public class Sistema {
 
 		for (Promocion promo : listaPromociones.descendingSet()) {
 
-			boolean tipoDeAtraccionFavorita = usuario.getAtraccionFavorita() == promo.getTipoDeAtraccion();
+			boolean tipoDeAtraccionFavorita = usuario.getAtraccionFavorita() == promo.getTipo();
 			boolean puedePagarlo = usuario.getPresupuesto() >= promo.getCosto();
 			boolean tieneTiempo = usuario.getTiempoDisponible() >= promo.getTiempoNecesario();
 			boolean tieneAtraccionYaComprada = usuario.getItinerario().getAtraccionesAceptadas().contains(
@@ -207,7 +207,7 @@ public class Sistema {
 		listaDisponibles.addAll(listaAtracciones.descendingSet());
 
 		for (Mostrable objeto : listaDisponibles) {
-			boolean tipoDeAtraccionFavorita = usuario.getAtraccionFavorita() == objeto.getTipoDeAtraccion();
+			boolean tipoDeAtraccionFavorita = usuario.getAtraccionFavorita() == objeto.getTipo();
 			boolean puedePagarlo = usuario.getPresupuesto() >= objeto.getCosto();
 			boolean tieneTiempo = usuario.getTiempoDisponible() >= objeto.getTiempoNecesario();
 			boolean yaFueComprada = objeto.estaEnItinerario(usuario.getItinerario());
@@ -236,7 +236,7 @@ public class Sistema {
 		listaDisponibles.addAll(listaAtracciones.descendingSet());
 
 		for (Mostrable objeto : listaDisponibles) {
-			boolean tipoDeAtraccionFavorita = usuario.getAtraccionFavorita() == objeto.getTipoDeAtraccion();
+			boolean tipoDeAtraccionFavorita = usuario.getAtraccionFavorita() == objeto.getTipo();
 			boolean puedePagarlo = usuario.getPresupuesto() >= objeto.getCosto();
 			boolean tieneTiempo = usuario.getTiempoDisponible() >= objeto.getTiempoNecesario();
 			boolean yaFueComprada = objeto.estaEnItinerario(usuario.getItinerario());

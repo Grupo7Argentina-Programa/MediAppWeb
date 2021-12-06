@@ -5,14 +5,14 @@ public class Absoluta extends Promocion {
 	public Absoluta(String nombreDePromo, int costo, Atraccion a, Atraccion b)
 			throws NombreInvalido, TipoDeAtraccionDistinta {
 
-		boolean tiposDistintos = a.getTipoDeAtraccion() != b.getTipoDeAtraccion();
+		boolean tiposDistintos = a.getTipo() != b.getTipo();
 
 		if (nombreDePromo == "")
 			throw new NombreInvalido();
 		if (tiposDistintos)
 			throw new TipoDeAtraccionDistinta();
 		this.nombreDePromocion = nombreDePromo;
-		this.tiposDeAtracciones = a.getTipoDeAtraccion();
+		this.tiposDeAtracciones = a.getTipo();
 		this.costo = costo;
 		this.tiempoNecesario = a.getTiempoNecesario() + b.getTiempoNecesario();
 		this.atraccion1 = a;

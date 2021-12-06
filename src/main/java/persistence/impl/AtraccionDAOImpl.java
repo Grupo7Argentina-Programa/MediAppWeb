@@ -70,7 +70,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setInt(2, atraccion.getCosto());
 			statement.setDouble(3, atraccion.getTiempoNecesario());
 			statement.setInt(4, atraccion.getCupo());
-			statement.setString(5, atraccion.getTipoDeAtraccion().name().toLowerCase());
+			statement.setString(5, atraccion.getTipo().name().toLowerCase());
 			int rows = statement.executeUpdate();
 
 			return rows;

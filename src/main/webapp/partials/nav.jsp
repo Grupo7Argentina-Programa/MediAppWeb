@@ -20,21 +20,21 @@
 				<div class="dropdown">
 					<button class="dropbtn">Administrador</button>
 					<div class="dropdown-content">
-						<a href="listado-atracciones.jsp">Atracciones</a> <a
-							href="listado-promociones.jsp">Promociones</a> <a
-							href="listado-usuarios.jsp">Usuarios</a>
+						<a href="listado-atracciones.do">Atracciones</a> <a
+							href="listado-promociones.do">Promociones</a> <a
+							href="listado-usuarios.do">Usuarios</a>
 					</div>
 				</div>
 
 				<c:choose>
-					<c:when test="${username != null}">
+					<c:when test="${usuario != null}">
 
 						<!-- Example split danger button -->
 						<div class="btn-group lg">
 							<a href="user.jsp">
 								<button type="button" class="btn btn-primary"
 									style="min-width: 100px; text-align-last: center">
-									<c:out value="${username}"></c:out>
+									<c:out value="${usuario.nombre}"></c:out>
 								</button>
 							</a>
 							<button type="button"
@@ -43,8 +43,8 @@
 								<span class="visually-hidden">Toggle Dropdown</span>
 							</button>
 							<ul class="dropdown-menu" style="left: -39px">
-								<li><a class="dropdown-item" href="#"> monedas</a></li>
-								<li><a class="dropdown-item" href="#"> horas</a></li>
+								<li><a class="dropdown-item" href="#"><c:out value="${usuario.presupuesto}"></c:out> monedas</a></li>
+								<li><a class="dropdown-item" href="#"><c:out value="${usuario.tiempoDisponible}"></c:out> horas</a></li>
 								<li><hr class="dropdown-divider"></li>
 								<li><a class="dropdown-item" href="logout">Cerrar
 										sesión</a></li>

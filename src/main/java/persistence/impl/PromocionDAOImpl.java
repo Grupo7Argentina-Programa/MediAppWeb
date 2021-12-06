@@ -100,7 +100,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 			statement.setString(6, promocion.getAtraccion2().getNombre());
 			statement.setString(7,(promocion.getAtraccion3() == null) ? null : promocion.getAtraccion3().getNombre());
 			statement.setString(8,(promocion.getAtraccion4() == null) ? null : promocion.getAtraccion4().getNombre());
-			statement.setString(9, promocion.getTipoDeAtraccion().name().toLowerCase());
+			statement.setString(9, promocion.getTipo().name().toLowerCase());
 			statement.setString(10, promocion.getTipoDePromocion());
 			int rows = statement.executeUpdate();
 

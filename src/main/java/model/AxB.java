@@ -6,8 +6,8 @@ public class AxB extends Promocion {
 
 	public AxB(String nombreDePromo, Atraccion a, Atraccion b, Atraccion c, Atraccion d) throws NombreInvalido, TipoDeAtraccionDistinta {
 
-		boolean tiposDistintos = a.getTipoDeAtraccion() != b.getTipoDeAtraccion()
-				|| b.getTipoDeAtraccion() != c.getTipoDeAtraccion() || c.getTipoDeAtraccion() != d.getTipoDeAtraccion();
+		boolean tiposDistintos = a.getTipo() != b.getTipo()
+				|| b.getTipo() != c.getTipo() || c.getTipo() != d.getTipo();
 
 
 			if (nombreDePromo == "") {
@@ -19,7 +19,7 @@ public class AxB extends Promocion {
 			}
 
 			this.nombreDePromocion = nombreDePromo;
-			this.tiposDeAtracciones = a.getTipoDeAtraccion();
+			this.tiposDeAtracciones = a.getTipo();
 			this.costo = a.getCosto() + b.getCosto() + c.getCosto();
 			this.tiempoNecesario = a.getTiempoNecesario() + b.getTiempoNecesario() + c.getTiempoNecesario()
 					+ d.getTiempoNecesario();
@@ -31,8 +31,8 @@ public class AxB extends Promocion {
 	}
 
 	public AxB(String nombreDePromo, Atraccion a, Atraccion b, Atraccion c) throws NombreInvalido, TipoDeAtraccionDistinta {
-		boolean tiposDistintos = a.getTipoDeAtraccion() != b.getTipoDeAtraccion()
-				|| b.getTipoDeAtraccion() != c.getTipoDeAtraccion();
+		boolean tiposDistintos = a.getTipo() != b.getTipo()
+				|| b.getTipo() != c.getTipo();
 
 			if (nombreDePromo == "") {
 				throw new NombreInvalido();
@@ -43,7 +43,7 @@ public class AxB extends Promocion {
 			}
 
 			this.nombreDePromocion = nombreDePromo;
-			this.tiposDeAtracciones = a.getTipoDeAtraccion();
+			this.tiposDeAtracciones = a.getTipo();
 			this.costo = a.getCosto() + b.getCosto();
 			this.tiempoNecesario = a.getTiempoNecesario() + b.getTiempoNecesario() + c.getTiempoNecesario();
 			this.atraccion1 = a;
