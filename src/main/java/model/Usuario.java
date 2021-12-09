@@ -123,10 +123,17 @@ public class Usuario implements Comparable<Usuario> {
 	}
 
 	public boolean puedeComprar(Mostrable mostrable) {
-		return (mostrable.getCupo() >= 1 && this.presupuesto >= mostrable.getCosto()
-				&& this.tiempoDisponible >= mostrable.getTiempoNecesario()
-				&& !this.itinerario.getAtraccionesAceptadas().contains(mostrable)
-				&& !this.itinerario.getPromocionesAceptadas().contains(mostrable));
+		return (this.presupuesto >= mostrable.getCosto());
+	}
+
+	public boolean puedeAsistir(Mostrable mostrable) {
+		return (this.tiempoDisponible >= mostrable.getTiempoNecesario());
+	}
+
+	public boolean enItinerario(Mostrable mostrable) {
+						
+		return (this.itinerario.getAtraccionesAceptadas().contains(mostrable)
+				|| this.itinerario.getPromocionesAceptadas().contains(mostrable));
 	}
 
 	public void setId(int id) {
@@ -166,10 +173,10 @@ public class Usuario implements Comparable<Usuario> {
 
 		errors = new HashMap<String, String>();
 		if (this.presupuesto < 0) {
-			errors.put("costo", "Debe ser positivo");
+			errors.put("presupuesto", "Debe ser positivo");
 		}
 		if (this.tiempoDisponible < 0) {
-			errors.put("tiempo requerido", "Debe ser positivo");
+			errors.put("tiempoDisponible", "Debe ser positivo");
 		}
 	}
 }

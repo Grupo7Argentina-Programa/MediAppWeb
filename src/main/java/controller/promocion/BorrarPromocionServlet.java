@@ -28,7 +28,7 @@ public class BorrarPromocionServlet extends HttpServlet implements Servlet {
 		Integer id = Integer.parseInt(req.getParameter("id"));
 		
 		promocionService.delete(id);
-
+		req.setAttribute("flash", "Promoción borrada con éxito");
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listado-promociones.do");
 		dispatcher.forward(req, resp);
 	}

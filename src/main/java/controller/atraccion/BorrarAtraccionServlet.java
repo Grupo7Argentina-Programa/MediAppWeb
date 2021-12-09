@@ -26,9 +26,9 @@ public class BorrarAtraccionServlet extends HttpServlet implements Servlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		Integer id = Integer.parseInt(req.getParameter("id"));
-		
+
 		atraccionService.delete(id);
-		
+		req.setAttribute("flash", "Atracción borrada con éxito");
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listado-atracciones.do");
 		dispatcher.forward(req, resp);
 	}

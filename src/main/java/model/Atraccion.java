@@ -170,4 +170,8 @@ public class Atraccion implements Mostrable, Comparable<Atraccion> {
 	public void setTipo(TipoDeAtraccion tipo) {
 		this.tipo = tipo;		
 	}
+
+	public boolean hayCupo(Integer i) {
+		return this.cupo >= i;
+	}
 }

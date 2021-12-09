@@ -28,7 +28,7 @@ public class BorrarUsuarioServlet extends HttpServlet implements Servlet {
 		Integer id = Integer.parseInt(req.getParameter("id"));
 		
 		usuarioService.delete(id);
-				
+		req.setAttribute("flash", "Usuario borrado con éxito");
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listado-usuarios.do");
 		dispatcher.forward(req, resp);
 	}

@@ -178,4 +178,11 @@ public abstract class Promocion implements Mostrable, Comparable<Promocion> {
 		this.atraccion4 = atraccion4;
 	}
 
+	public boolean hayCupo(Integer i) {
+		return this.atraccion1.getCupo() >= i && 
+				this.atraccion2.getCupo() >= i &&
+				this.atraccion3 != null	? this.atraccion3.getCupo() >= i : true &&
+				this.atraccion4 != null ? this.atraccion4.getCupo() >= i : true;
+	}
+
 }
