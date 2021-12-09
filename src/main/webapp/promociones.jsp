@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="es">
 
@@ -18,98 +19,60 @@
 			<div class="container">
 
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-					<div class="col">
-						<div class="card shadow-sm">
-							<div id="carouselExampleControls" class="carousel slide"
-								data-bs-ride="carousel">
-								<div class="carousel-inner">
-									<div class="carousel-item active">
-										<img src="resources/erebor.png" class="d-block w-100"
-											alt="...">
+					<c:forEach items="${promociones}" var="promocion">
+						<div class="col">
+							<div class="card shadow-sm">
+								<div id="carouselExampleControls" class="carousel slide"
+									data-bs-ride="carousel">
+									<div class="carousel-inner">
+										<div class="carousel-item active">
+											<img src="resources/erebor.png" class="d-block w-100"
+												alt="...">
+										</div>
+										<div class="carousel-item">
+											<img src="resources/lacomarca.png" class="d-block w-100"
+												alt="...">
+										</div>
+										<div class="carousel-item">
+											<img src="resources/bosquenegro.png" class="d-block w-100"
+												alt="..."></img>
+										</div>
 									</div>
-									<div class="carousel-item">
-										<img src="resources/lacomarca.png" class="d-block w-100"
-											alt="...">
-									</div>
-									<div class="carousel-item">
-										<img src="resources/bosquenegro.png" class="d-block w-100"
-											alt="..."></img>
-									</div>
+									<h2 id="precio" style="padding-top: 15px; padding-left: 15px">
+										<c:out value="$ ${promocion.costo}"></c:out>
+									</h2>
+
+
 								</div>
-								<h2 id="precio" style="padding-top: 15px; padding-left: 15px">$12</h2>
-								<button class="carousel-control-prev" type="button"
-									data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Previous</span>
-								</button>
-								<button class="carousel-control-next" type="button"
-									data-bs-target="#carouselExampleControls" data-bs-slide="next">
-									<span class="carousel-control-next-icon" aria-hidden="true"></span>
-									<span class="visually-hidden">Next</span>
-								</button>
 
-							</div>
-
-							<div class="card-body">
-								<p class="card-atraccion">Pack Aventura</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
-											al carrito</button>
+								<div class="card-body">
+									<h5 class="card-atraccion">
+										<c:out value="${promocion.nombre}"></c:out>
+									</h5>
+									<p>
+										Atracciones incluidas:
+										<c:out value="${promocion.atraccion1.nombre},"></c:out>
+										<c:out value="${promocion.atraccion2.nombre}"></c:out>
+										<c:if test="${promocion.atraccion3 != null}">
+											<c:out value=", ${promocion.atraccion3.nombre}"></c:out>
+										</c:if>
+										<c:if test="${promocion.atraccion4 != null}">
+											<c:out value=", ${promocion.atraccion4.nombre}"></c:out>
+										</c:if>
+									</p>
+									<div class="d-flex justify-content-between align-items-center">
+										<div class="btn-group">
+											<button type="button"
+												class="btn btn-sm btn-outline-secondary">Ver</button>
+											<button type="button"
+												class="btn btn-sm btn-outline-secondary">Añadir al
+												carrito</button>
+										</div>
 									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%"
-								height="225" xmlns="http://www.w3.org/2000/svg" role="img"
-								aria-label="Placeholder: Thumbnail"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title><rect width="100%" height="100%"
-									fill="#55595c"></rect>
-								<text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-							<div class="card-body">
-								<p class="card-text">This is a wider card with supporting
-									text below as a natural lead-in to additional content. This
-									content is a little bit longer.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-									</div>
-									<small class="text-muted">9 mins</small>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<svg class="bd-placeholder-img card-img-top" width="100%"
-								height="225" xmlns="http://www.w3.org/2000/svg" role="img"
-								aria-label="Placeholder: Thumbnail"
-								preserveAspectRatio="xMidYMid slice" focusable="false">
-								<title>Placeholder</title><rect width="100%" height="100%"
-									fill="#55595c"></rect>
-								<text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-							<div class="card-body">
-								<p class="card-text">This is a wider card with supporting
-									text below as a natural lead-in to additional content. This
-									content is a little bit longer.</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-									</div>
-									<small class="text-muted">9 mins</small>
-								</div>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

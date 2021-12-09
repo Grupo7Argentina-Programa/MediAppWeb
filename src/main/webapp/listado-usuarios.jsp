@@ -17,43 +17,35 @@
 	<main class="container-fluid" style="padding-bottom: 30px;">
 
 		<div class="container">
-			<table class="table table-dark table-hover">
-				<thead>
-					<tr>
-						<th scope="col">Id</th>
-						<th scope="col">Nombre</th>
-						<th scope="col">Dinero</th>
-						<th scope="col">Tiempo disponible</th>
-						<th scope="col">Tipo de atracción favorita</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${usuarios}" var="usuario">
+			<c:if test="${usuario.isAdmin()}">
+				<table class="table table-dark table-hover">
+					<thead>
 						<tr>
-							<td>id</td>
-							<td><strong><c:out
-										value="${usuario.nombre}"></c:out></strong>
-								<p>Descripción genérica</p></td>
-							<td><c:out value="${usuario.dinero}"></c:out></td>
-							<td><c:out value="${usuario.tiempoDisponible}"></c:out></td>
-							<td><c:out value="${usuario.atraccionFavorita}"></c:out></td>
+							<th scope="col">Id</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Dinero</th>
+							<th scope="col">Tiempo disponible</th>
+							<th scope="col">Tipo de atracción favorita</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-		<div class="container">
-			<div class="collapse" id="collapseExample">
-				<div class="card card-body">
-
-					<ul>
-						<li>Atracción 1</li>
-						<li>Atracción 2</li>
-						<li>Atracción 3</li>
-						<li>Atracción 4</li>
-					</ul>
-				</div>
-			</div>
+					</thead>
+					<tbody>
+						<c:forEach items="${usuarios}" var="usuario">
+							<tr>
+								<td><c:out value="${usuario.id}"></c:out></td>
+								<td><strong><c:out value="${usuario.nombre}"></c:out></strong></td>
+								<td><c:out value="${usuario.presupuesto}"></c:out></td>
+								<td><c:out value="${usuario.tiempoDisponible}"></c:out></td>
+								<td><c:out value="${usuario.atraccionFavorita}"></c:out></td>
+								<td><a href="edit-usuario.do?id=${usuario.id}"
+									class="btn btn-light rounded-0" role="button">Editar<i
+										class="bi bi-pencil-fill"></i></a><a href="#"
+									class="btn btn-danger rounded" role="button">Borrar<i
+										class="bi bi-x-circle-fill"></i></a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:if>
 		</div>
 	</main>
 </body>

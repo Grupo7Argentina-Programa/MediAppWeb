@@ -8,12 +8,13 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import model.Usuario;
 
+@WebFilter(urlPatterns = "*.do")
 public class LoggedFilter implements Filter {
 
-	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
@@ -22,6 +23,7 @@ public class LoggedFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			request.setAttribute("flash", "Por favor, inicie sesión para continuar");
+
 			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
 		}

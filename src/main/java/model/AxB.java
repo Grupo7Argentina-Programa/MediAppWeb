@@ -4,21 +4,10 @@ import java.util.ArrayList;
 
 public class AxB extends Promocion {
 
-	public AxB(String nombreDePromo, Atraccion a, Atraccion b, Atraccion c, Atraccion d) throws NombreInvalido, TipoDeAtraccionDistinta {
+	public AxB(Integer id, String nombreDePromo, Atraccion a, Atraccion b, Atraccion c, Atraccion d)  {
 
-		boolean tiposDistintos = a.getTipo() != b.getTipo()
-				|| b.getTipo() != c.getTipo() || c.getTipo() != d.getTipo();
-
-
-			if (nombreDePromo == "") {
-				throw new NombreInvalido();
-			}
-
-			if (tiposDistintos) {
-				throw new TipoDeAtraccionDistinta();
-			}
-
-			this.nombreDePromocion = nombreDePromo;
+			this.id = id;
+			this.nombre = nombreDePromo;
 			this.tiposDeAtracciones = a.getTipo();
 			this.costo = a.getCosto() + b.getCosto() + c.getCosto();
 			this.tiempoNecesario = a.getTiempoNecesario() + b.getTiempoNecesario() + c.getTiempoNecesario()
@@ -28,21 +17,13 @@ public class AxB extends Promocion {
 			this.atraccion3 = c;
 			this.atraccion4 = d;
 			this.cantidadDeAtracciones = 4;
+			this.descuento = 0;
 	}
 
-	public AxB(String nombreDePromo, Atraccion a, Atraccion b, Atraccion c) throws NombreInvalido, TipoDeAtraccionDistinta {
-		boolean tiposDistintos = a.getTipo() != b.getTipo()
-				|| b.getTipo() != c.getTipo();
+	public AxB(Integer id, String nombreDePromo, Atraccion a, Atraccion b, Atraccion c) {
 
-			if (nombreDePromo == "") {
-				throw new NombreInvalido();
-			}
-
-			if (tiposDistintos) {
-				throw new TipoDeAtraccionDistinta();
-			}
-
-			this.nombreDePromocion = nombreDePromo;
+			this.id = id;
+			this.nombre = nombreDePromo;
 			this.tiposDeAtracciones = a.getTipo();
 			this.costo = a.getCosto() + b.getCosto();
 			this.tiempoNecesario = a.getTiempoNecesario() + b.getTiempoNecesario() + c.getTiempoNecesario();
@@ -50,7 +31,35 @@ public class AxB extends Promocion {
 			this.atraccion2 = b;
 			this.atraccion3 = c;
 			this.cantidadDeAtracciones = 3;
+			this.descuento = 0;
+	}
+	
+	public AxB(String nombreDePromo, Atraccion a, Atraccion b, Atraccion c, Atraccion d) {
 
+			this.nombre = nombreDePromo;
+			this.tiposDeAtracciones = a.getTipo();
+			this.costo = a.getCosto() + b.getCosto() + c.getCosto();
+			this.tiempoNecesario = a.getTiempoNecesario() + b.getTiempoNecesario() + c.getTiempoNecesario()
+					+ d.getTiempoNecesario();
+			this.atraccion1 = a;
+			this.atraccion2 = b;
+			this.atraccion3 = c;
+			this.atraccion4 = d;
+			this.cantidadDeAtracciones = 4;
+			this.descuento = 0;
+	}
+
+	public AxB(String nombreDePromo, Atraccion a, Atraccion b, Atraccion c){
+
+			this.nombre = nombreDePromo;
+			this.tiposDeAtracciones = a.getTipo();
+			this.costo = a.getCosto() + b.getCosto();
+			this.tiempoNecesario = a.getTiempoNecesario() + b.getTiempoNecesario() + c.getTiempoNecesario();
+			this.atraccion1 = a;
+			this.atraccion2 = b;
+			this.atraccion3 = c;
+			this.cantidadDeAtracciones = 3;
+			this.descuento = 0;
 	}
 
 	@Override

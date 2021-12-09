@@ -15,40 +15,42 @@ public class UsuarioService {
 		return DAOFactory.getUserDAO().findAll();
 	}
 
-	public Usuario crear(String nombre, Integer presupuesto, Double tiempo, TipoDeAtraccion tipo) {
+	public Usuario crear(Integer id, String nombre, Integer presupuesto, Double tiempo, TipoDeAtraccion tipo,
+			boolean admin) {
 
-		Usuario usuario = new Usuario(nombre, presupuesto, tiempo, tipo);
+		Usuario usuario = new Usuario(id, nombre, presupuesto, tiempo, tipo, admin);
 
 		return usuario;
 	}
 
-	public Usuario update(String nombre, Integer costo, Double duracion, Integer cupo) {
+	public Usuario update(Integer id, String nombre, Integer presupuesto, Double tiempoDisponible,
+			TipoDeAtraccion tipo) {
 
 		UserDAO userDAO = DAOFactory.getUserDAO();
-		Usuario usuario = userDAO.findByUsername(nombre);
+		Usuario usuario = userDAO.find(id);
 
-		/* usuario.setNombre(nombre);
-		usuario.setCosto(costo);
-		usuario.setDuracion(duracion);
-		usuario.setCupo(cupo);
-*/
-		/*
-		 * if (attraction.isValid()) { attractionDAO.update(attraction); // XXX: si no
-		 * devuelve "1", es que hubo más errores }
-		 */
+		usuario.setNombre(nombre);
+		usuario.setPresupuesto(presupuesto);
+		usuario.setTiempoDisponible(tiempoDisponible);
+		usuario.setAtraccionFavorita(tipo);
+
+		if (usuario.isValid()) {
+			userDAO.update(usuario); // XXX: si no devuelve "1", es que hubo más errores
+		}
+
 		return usuario;
 	}
 
 	public void delete(Integer id) throws ValorInvalido, NombreInvalido, TiempoInvalido {
-		Usuario usuario = new Usuario("", 0, 0, null);
+		Usuario usuario = new Usuario(-1, "", 0, 0, null, false);
 
 		UserDAO userDAO = DAOFactory.getUserDAO();
 		userDAO.delete(usuario);
 	}
 
-	public Usuario find(String nombre) {
+	public Usuario find(Integer id) {
 		UserDAO userDAO = DAOFactory.getUserDAO();
-		return userDAO.findByUsername(nombre);
+		return userDAO.find(id);
 	}
 
 }

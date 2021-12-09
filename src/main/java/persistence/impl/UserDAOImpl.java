@@ -68,6 +68,26 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
+	public Usuario find(Integer id) {
+		try {
+
+			String sql = "SELECT * FROM USUARIOS WHERE ID = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			ResultSet resultados = statement.executeQuery();
+
+			Usuario user = null;
+
+			if (resultados.next()) {
+				user = toUser(resultados);
+			}
+
+			return user;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
 	public Usuario findByUsername(String username) {
 		try {
 
@@ -144,8 +164,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	private Usuario toUser(ResultSet resultados) throws SQLException, NombreInvalido, ValorInvalido, TiempoInvalido {
-		return new Usuario(resultados.getString(2), resultados.getInt(3), resultados.getDouble(4),
-				TipoDeAtraccion.valueOf(resultados.getString(5).toUpperCase()));
+		return new Usuario(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getDouble(4),
+				TipoDeAtraccion.valueOf(resultados.getString(5).toUpperCase()), (resultados.getInt(6) == 1) ? true : false);
 	}
 
 }

@@ -29,13 +29,16 @@
 						<h5 class="card-title">
 							<c:out value="${usuario.nombre}"></c:out>
 						</h5>
-						<p class="card-text">Some quick example text to build on the
-							card title and make up the bulk of the card's content.</p>
+						<p class="card-text">Hola, soy una descripción</p>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item"><c:out value="${usuario.presupuesto}"></c:out> monedas</li>
-						<li class="list-group-item"><c:out value="${usuario.tiempoDisponible}"></c:out> horas</li>
-						<li class="list-group-item">Aventura</li>
+						<li class="list-group-item"><c:out
+								value="${usuario.presupuesto}"></c:out> moneda(s) restante(s)</li>
+						<li class="list-group-item"><c:out
+								value="${usuario.tiempoDisponible}"></c:out> hora(s)
+							disponible(s)</li>
+						<li class="list-group-item"><c:out
+								value="Tipo de atracción favorita: ${usuario.atraccionFavorita}"></c:out></li>
 					</ul>
 					<div class="card-body">
 						<a href="#" class="card-link">Card link</a> <a href="#"
@@ -47,66 +50,31 @@
 			<div class="col-8">
 				<!-- Caja de itinerario -->
 				<div class="card mb-3" style="max-width: 540px;">
-					<div class="row g-0">
-						<div class="col-md-4">
-							<img src="resources/producto.png" class="img-fluid rounded-start"
-								alt="...">
+					<c:if test="${usuario.itinerario.atraccionesAceptadas.isEmpty() }">
+						<div class="row g-0">
+							<h5>Vaya, parece que todavía no hay nada.</h5>
+							<h6>Cuando compres una atracción la podrás encontrar aquí.</h6>
 						</div>
-						<div class="col-md-8">
-							<div class="card-body">
-								<h5 class="card-title">Atracción comprada</h5>
-								<p class="card-text">Descripción de la atracción</p>
-								<p class="card-text">
-									<small class="text-muted">Last updated 3 mins ago</small>
-								</p>
+					</c:if>
+					<c:forEach items="${usuario.itinerario.atraccionesAceptadas}"
+						var="atraccion">
+						<div class="row g-0">
+							<div class="col-md-4">
+								<img src="resources/producto.png"
+									class="img-fluid rounded-start" alt="...">
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title">
+										<c:out value="${atraccion.nombre}"></c:out>
+									</h5>
+									<p class="card-text">
+										<c:out value="${atraccion.tiempoNecesario} horas"></c:out>
+									</p>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row g-0">
-						<div class="col-md-4">
-							<img src="resources/producto.png" class="img-fluid rounded-start"
-								alt="...">
-						</div>
-						<div class="col-md-8">
-							<div class="card-body">
-								<h5 class="card-title">Atracción comprada</h5>
-								<p class="card-text">Descripción de la atracción</p>
-								<p class="card-text">
-									<small class="text-muted">Last updated 3 mins ago</small>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="row g-0">
-						<div class="col-md-4">
-							<img src="resources/producto.png" class="img-fluid rounded-start"
-								alt="...">
-						</div>
-						<div class="col-md-8">
-							<div class="card-body">
-								<h5 class="card-title">Atracción comprada</h5>
-								<p class="card-text">Descripción de la atracción</p>
-								<p class="card-text">
-									<small class="text-muted">Last updated 3 mins ago</small>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="row g-0">
-						<div class="col-md-4">
-							<img src="resources/producto.png" class="img-fluid rounded-start"
-								alt="...">
-						</div>
-						<div class="col-md-8">
-							<div class="card-body">
-								<h5 class="card-title">Atracción comprada</h5>
-								<p class="card-text">Descripción de la atracción</p>
-								<p class="card-text">
-									<small class="text-muted">Last updated 3 mins ago</small>
-								</p>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

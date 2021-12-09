@@ -326,7 +326,7 @@ public class Sistema {
 			TipoDeAtraccion tipoDeAtraccion = TipoDeAtraccion.valueOf(auxiliar[3].toUpperCase());
 			Usuario nuevoUsuario;
 
-			nuevoUsuario = new Usuario(nombre, dinero, tiempo, tipoDeAtraccion);
+			nuevoUsuario = new Usuario(-1, nombre, dinero, tiempo, tipoDeAtraccion, false);
 
 			userDAO.insert(nuevoUsuario);
 			Sistema.user = nuevoUsuario;

@@ -2,7 +2,7 @@ package model;
 
 public class Absoluta extends Promocion {
 
-	public Absoluta(String nombreDePromo, int costo, Atraccion a, Atraccion b)
+	public Absoluta(Integer id, String nombreDePromo, int costo, Atraccion a, Atraccion b)
 			throws NombreInvalido, TipoDeAtraccionDistinta {
 
 		boolean tiposDistintos = a.getTipo() != b.getTipo();
@@ -11,13 +11,28 @@ public class Absoluta extends Promocion {
 			throw new NombreInvalido();
 		if (tiposDistintos)
 			throw new TipoDeAtraccionDistinta();
-		this.nombreDePromocion = nombreDePromo;
+		
+		this.id = id;
+		this.nombre = nombreDePromo;
 		this.tiposDeAtracciones = a.getTipo();
 		this.costo = costo;
 		this.tiempoNecesario = a.getTiempoNecesario() + b.getTiempoNecesario();
 		this.atraccion1 = a;
 		this.atraccion2 = b;
 		this.cantidadDeAtracciones = 2;
+		this.descuento = 0;
+	}
+	
+	public Absoluta(String nombreDePromo, int costo, Atraccion a, Atraccion b)  {
+		
+		this.nombre = nombreDePromo;
+		this.tiposDeAtracciones = a.getTipo();
+		this.costo = costo;
+		this.tiempoNecesario = a.getTiempoNecesario() + b.getTiempoNecesario();
+		this.atraccion1 = a;
+		this.atraccion2 = b;
+		this.cantidadDeAtracciones = 2;
+		this.descuento = 0;
 	}
 
 	@Override

@@ -8,9 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import model.TipoDeAtraccion;
 import model.Atraccion;
-import model.NombreInvalido;
-import model.TiempoInvalido;
-import model.ValorInvalido;
 import persistence.AtraccionDAO;
 import persistence.common.ConnectionProvider;
 import persistence.common.MissingDataException;
@@ -36,10 +33,10 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		}
 	}
 
-	private Atraccion toAtraccion(ResultSet resultados)
-			throws SQLException, NombreInvalido, ValorInvalido, TiempoInvalido {
-		return new Atraccion(resultados.getString(1), resultados.getInt(2), resultados.getDouble(3),
-				resultados.getInt(4), TipoDeAtraccion.valueOf(resultados.getString(5).toUpperCase()));
+	private Atraccion toAtraccion(ResultSet resultados) throws SQLException {
+		return new Atraccion(resultados.getInt(1), resultados.getString(2), resultados.getInt(3),
+				resultados.getDouble(4), resultados.getInt(5),
+				TipoDeAtraccion.valueOf(resultados.getString(6).toUpperCase()), resultados.getString(7));
 	}
 
 	@Override
@@ -62,15 +59,17 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int insert(Atraccion atraccion) {
 		try {
-			String sql = "INSERT INTO ATRACCIONES (NOMBRE, COSTO, DURACION, CUPO, TIPODEATRACCION) VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO ATRACCIONES (NOMBRE, COSTO, DURACION, CUPO, TIPODEATRACCION, DESCRIPCION) VALUES (?, ?, ?, ?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
+
 			statement.setString(1, atraccion.getNombre());
 			statement.setInt(2, atraccion.getCosto());
 			statement.setDouble(3, atraccion.getTiempoNecesario());
 			statement.setInt(4, atraccion.getCupo());
 			statement.setString(5, atraccion.getTipo().name().toLowerCase());
+			statement.setString(6, atraccion.getDescripcion());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -82,12 +81,17 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int update(Atraccion atraccion) {
 		try {
-			String sql = "UPDATE ATRACCIONES SET CUPO = ? WHERE NOMBRE = ?";
+			String sql = "UPDATE ATRACCIONES SET NOMBRE = ?, COSTO = ?, DURACION = ?, TIPODEATRACCION = ?, CUPO = ?, DESCRIPCION = ? WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(2, atraccion.getNombre());
-			statement.setInt(1, atraccion.getCupo());
+			statement.setString(1, atraccion.getNombre());
+			statement.setInt(2, atraccion.getCosto());
+			statement.setDouble(3, atraccion.getTiempoNecesario());
+			statement.setString(4, atraccion.getTipo().name().toLowerCase());
+			statement.setInt(5, atraccion.getCupo());
+			statement.setString(6, atraccion.getDescripcion());
+			statement.setInt(7, atraccion.getId());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -99,11 +103,11 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int delete(Atraccion atraccion) {
 		try {
-			String sql = "DELETE FROM ATRACCIONES WHERE NOMBRE = ?";
+			String sql = "DELETE FROM ATRACCIONES WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, atraccion.getNombre());
+			statement.setInt(1, atraccion.getId());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -133,4 +137,23 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		}
 	}
 
+	public Atraccion find(Integer id) {
+		try {
+			String sql = "SELECT * FROM ATRACCIONES WHERE ID = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			ResultSet resultados = statement.executeQuery();
+
+			Atraccion atraccion = null;
+
+			if (resultados.next()) {
+				atraccion = toAtraccion(resultados);
+			}
+
+			return atraccion;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
 }

@@ -17,10 +17,9 @@
 	<main class="container-fluid" style="padding-bottom: 30px;">
 
 		<c:if test="${usuario != null}">
-			<h1 style="color: white">
+			<h1 style="color: white; text-align: center">
 				Te damos la bienvenida,
 				<c:out value="${usuario.nombre}" />
-				!
 			</h1>
 		</c:if>
 		

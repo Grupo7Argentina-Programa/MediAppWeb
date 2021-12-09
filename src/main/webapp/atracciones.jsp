@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="es">
 
@@ -13,121 +14,35 @@
 <body class="texto"
 	style="background-color: #000000; padding-top: 140px;">
 
-	<main class="container-fluid" style="padding-bottom: 30px;">
-		<div class="album py-5 bg-dark">
-			<div class="container">
-
-				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-					<div class="col">
-						<div class="card shadow-sm">
-							<img src="resources/erebor.png">
-							<rect width="100%" height="100%" fill="#55595c"></rect>
-							<h2 id="precio" style="padding-top: 15px; padding-left: 15px">$12</h2>
-
-							<div class="card-body">
-								<p class="card-atraccion">Erebor</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
-											al carrito</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<img src="resources/bosquenegro.png">
-							<rect width="100%" height="100%" fill="#55595c"></rect>
-							<h2 id="precio" style="padding-top: 15px; padding-left: 15px">$3</h2>
-
-							<div class="card-body">
-								<p class="card-atraccion">Bosque Negro</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
-											al carrito</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<img src="resources/ettenmoors.png">
-							<rect width="100%" height="100%" fill="#55595c"></rect>
-							<h2 id="precio" style="padding-top: 15px; padding-left: 15px">$5</h2>
-
-							<div class="card-body">
-								<p class="card-atraccion">Ettenmoors</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
-											al carrito</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<img src="resources/lacomarca.png">
-							<rect width="100%" height="100%" fill="#55595c"></rect>
-							<h2 id="precio" style="padding-top: 15px; padding-left: 15px">$3</h2>
-
-							<div class="card-body">
-								<p class="card-atraccion">La Comarca</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
-											al carrito</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<img src="resources/moria.png">
-							<rect width="100%" height="100%" fill="#55595c"></rect>
-							<h2 id="precio" style="padding-top: 15px; padding-left: 15px">$10</h2>
-
-							<div class="card-body">
-								<p class="card-atraccion">Moria</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
-											al carrito</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card shadow-sm">
-							<img src="resources/abismo.png">
-							<rect width="100%" height="100%" fill="#55595c"></rect>
-							<h2 id="precio" style="padding-top: 15px; padding-left: 15px">$5</h2>
-
-							<div class="card-body">
-								<p class="card-atraccion">Abismo de Helm</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
-											al carrito</button>
-									</div>
+	<main class="container" style="padding-bottom: 30px;">
+		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+			<c:forEach items="${atracciones}" var="atraccion">
+				<div class="col">
+					<div class="card shadow-sm">
+						<img src="resources/erebor.png">
+						<rect width="25%" height="25%" fill="#55595c"></rect>
+						<h1 style="padding-top: 15px; padding-left: 15px">
+							<c:out value="${atraccion.nombre}"></c:out>
+						</h1>
+						<h2 id="precio" style="padding-top: 15px; padding-left: 15px">
+							$
+							<c:out value="${atraccion.costo}"></c:out>
+						</h2>
+						<div class="card-body">
+							<p class="card-atraccion">
+								<c:out value="${atraccion.tiempoNecesario} horas requeridas"></c:out>
+							</p>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+									<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
+									<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
+										al carrito</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</main>
 </body>

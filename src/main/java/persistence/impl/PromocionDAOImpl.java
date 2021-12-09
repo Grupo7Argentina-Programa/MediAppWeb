@@ -54,16 +54,16 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 		switch (resultados.getString("tipoDePromocion")) {
 		case "Porcentual":
-			promo = new Porcentual(resultados.getString(2), resultados.getInt(4), atraccion1, atraccion2);
+			promo = new Porcentual(resultados.getInt(1), resultados.getString(2), resultados.getInt(4), atraccion1, atraccion2);
 			break;
 		case "AxB":
 			if (resultados.getString(9) != null)
-				promo = new AxB(resultados.getString(2), atraccion1, atraccion2, atraccion3, atraccion4);
+				promo = new AxB(resultados.getInt(1), resultados.getString(2), atraccion1, atraccion2, atraccion3, atraccion4);
 			else
-				promo = new AxB(resultados.getString(2), atraccion1, atraccion2, atraccion3);
+				promo = new AxB(resultados.getInt(1), resultados.getString(2), atraccion1, atraccion2, atraccion3);
 			break;
 		case "Absoluta":
-			promo = new Absoluta(resultados.getString(2), resultados.getInt(3), atraccion1, atraccion2);
+			promo = new Absoluta(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), atraccion1, atraccion2);
 			break;
 		}
 		return promo;
@@ -155,7 +155,6 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	@Override
 	public int getIDByPromocion(Promocion promo) {
-		//TODO Testear m�todo
 		try {
 			String sql = "SELECT ID FROM PROMOCIONES WHERE NOMBRE = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -170,6 +169,27 @@ public class PromocionDAOImpl implements PromocionDAO {
 			}
 
 			return id;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public Promocion find(Integer id) {
+		try {
+			String sql = "SELECT * FROM PROMOCIONES WHERE ID = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			ResultSet resultados = statement.executeQuery();
+
+			Promocion promocion = null;
+
+			if (resultados.next()) {
+				promocion = toPromocion(resultados);
+			}
+
+			return promocion;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}

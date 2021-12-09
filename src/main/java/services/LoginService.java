@@ -9,12 +9,13 @@ public class LoginService {
 
 	public Usuario login(String username, String password) {
 		UserDAO userDAO = DAOFactory.getUserDAO();
-    	Usuario usuario = userDAO.findByUsername(username);
-    	
-    	//if (usuario.isNull() || !usuario.checkPassword(password)) {
-    		//usuario = NullUsuario.build();
-    	//}
-    	return usuario;
+		Usuario usuario = userDAO.findByUsername(username);
+
+		// !usuario.checkPassword(password)) {
+		if (usuario == null) {
+			usuario = NullUsuario.build();
+		}
+		return usuario;
 	}
-	
+
 }

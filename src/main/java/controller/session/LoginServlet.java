@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Usuario;
 import services.LoginService;
 
-@WebServlet("/login.do")
+@WebServlet("/login.dol")
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -8992760235223363330L;
@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			req.setAttribute("flash", "Nombre de usuario o contraseña incorrectos");
 
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("login.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 			dispatcher.forward(req, resp);
 		}
 	}

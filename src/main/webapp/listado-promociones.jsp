@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="es">
 
@@ -16,72 +17,54 @@
 	<main class="container-fluid" style="padding-bottom: 30px;">
 
 		<div class="container">
-			<table class="table table-dark table-hover">
-				<thead>
-					<tr>
-						<th scope="col">Id</th>
-						<th scope="col">Nombre</th>
-						<th scope="col">Costo</th>
-						<th scope="col">Duración</th>
-						<th scope="col">Cupo</th>
-						<th scope="col">Tipo de atracción</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mordor</td>
-						<td>25</td>
-						<td>3 horas</td>
-						<td>2</td>
-						<td>Aventura</td>
-						<td style="text-align: center"><div class="btn-group"
-								role="group" aria-label="Basic example">
-								<button type="button" class="btn btn-secondary">Editar</button>
-								<button type="button" class="btn btn-danger">Eliminar</button>
-							</div></td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mordor</td>
-						<td>25</td>
-						<td>3 horas</td>
-						<td>2</td>
-						<td>Aventura</td>
-						<td style="text-align: center"><div class="btn-group"
-								role="group" aria-label="Basic example">
-								<button type="button" class="btn btn-secondary">Editar</button>
-								<button type="button" class="btn btn-danger">Eliminar</button>
-							</div></td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mordor</td>
-						<td>25</td>
-						<td>3 horas</td>
-						<td>2</td>
-						<td>Aventura</td>
-						<td style="text-align: center"><div class="btn-group"
-								role="group" aria-label="Basic example">
-								<button type="button" class="btn btn-secondary">Editar</button>
-								<button type="button" class="btn btn-danger">Eliminar</button>
-							</div></td>
-					</tr>
-					<tr>
-						<th scope="row">1</th>
-						<td>Mordor</td>
-						<td>25</td>
-						<td>3 horas</td>
-						<td>2</td>
-						<td>Aventura</td>
-						<td style="text-align: center"><div class="btn-group"
-								role="group" aria-label="Basic example">
-								<button type="button" class="btn btn-secondary">Editar</button>
-								<button type="button" class="btn btn-danger">Eliminar</button>
-							</div></td>
-					</tr>
-				</tbody>
-			</table>
+			<c:if test="${usuario.isAdmin()}">
+				<table class="table table-dark table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Costo</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${promociones}" var="promocion">
+							<tr>
+								<td><c:out value="${promocion.id }"></c:out></td>
+								<td><strong><c:out value="${promocion.nombre}"></c:out></strong>
+									<p>
+										Atracciones incluidas:
+										<c:out value="${promocion.atraccion1.nombre}"></c:out>
+										<c:out value=", ${promocion.atraccion2.nombre}"></c:out>
+										<c:if test="${promocion.atraccion3 != null}">
+											<c:out value=", ${promocion.atraccion3.nombre}"></c:out>
+										</c:if>
+										<c:if test="${promocion.atraccion4 != null}">
+											<c:out value=", ${promocion.atraccion4.nombre}"></c:out>
+										</c:if>
+									</p></td>
+								<td>$ <c:out value="${promocion.costo}"></c:out></td>
+
+								<td style="text-align: center;"><c:if
+										test="${user.isAdmin()}" /> <c:choose>
+
+										<c:when test="${usuario.puedeComprar(promocion)}">
+											<a href="#" class="btn btn-success rounded" role="button">Comprar</a>
+										</c:when>
+										<c:otherwise>
+											<a href="#" class="btn btn-secondary rounded disabled"
+												role="button">No se puede comprar</a>
+										</c:otherwise>
+									</c:choose> <c:if test="${usuario.isAdmin()}">
+										<a href="edit-promocion.do?id=${promocion.id}" class="btn btn-light rounded-0" role="button">Editar<i
+											class="bi bi-pencil-fill"></i></a>
+										<a href="#" class="btn btn-danger rounded" role="button">Borrar<i
+											class="bi bi-x-circle-fill"></i></a>
+									</c:if></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:if>
 		</div>
 	</main>
 </body>

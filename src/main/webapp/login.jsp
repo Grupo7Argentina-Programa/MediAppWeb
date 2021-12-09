@@ -17,7 +17,7 @@
 	<main class="container font-roboto"
 		style="text-align: -webkit-center; width: max-content; padding-top: 30px">
 
-		<form action="login.do" method="post">
+		<form action="login.dol" method="post">
 			<c:if test="${flash != null}">
 				<div class="alert alert-warning alert-dismissible fade show"
 					role="alert">

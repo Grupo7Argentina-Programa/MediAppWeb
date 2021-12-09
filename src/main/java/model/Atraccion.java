@@ -1,28 +1,44 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import persistence.AtraccionDAO;
 import persistence.common.DAOFactory;
 
-
 public class Atraccion implements Mostrable, Comparable<Atraccion> {
 
+	private int id;
 	private String nombre;
 	private Integer costo;
 	private Double tiempoNecesario;
 	private int cupo;
 	private TipoDeAtraccion tipo;
+	private String descripcion;
 	private AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+	private Map<String, String> errors;
 
-	public Atraccion(String nombre, Integer costo, Double tiempoNecesario, Integer cupo, TipoDeAtraccion tipo) {
+	public Atraccion(Integer id, String nombre, Integer costo, Double tiempoNecesario, Integer cupo, TipoDeAtraccion tipo, String descripcion) {
 
+		this.id = id;
+		this.nombre = nombre;
+		this.costo = costo;
+		this.tiempoNecesario = tiempoNecesario;
+		this.cupo = cupo;
+		this.tipo = tipo;
+		this.descripcion = descripcion;
+	}
+
+	public Atraccion(String nombre, Integer costo, Double tiempoNecesario, Integer cupo, TipoDeAtraccion tipo,
+			String descripcion) {
 
 		this.nombre = nombre;
 		this.costo = costo;
 		this.tiempoNecesario = tiempoNecesario;
 		this.cupo = cupo;
 		this.tipo = tipo;
+		this.descripcion = descripcion;
 	}
 
 	public String getNombre() {
@@ -43,8 +59,8 @@ public class Atraccion implements Mostrable, Comparable<Atraccion> {
 
 	@Override
 	public String toString() {
-		return "\n" + nombre + "\n Costo: " + costo + "\n Tiempo promedio requerido: " + tiempoNecesario
-				+ "\n Cupos: " + cupo + "\n Tipo de atracción: " + tipo + "\n ------------------------";
+		return "\n" + nombre + "\n Costo: " + costo + "\n Tiempo promedio requerido: " + tiempoNecesario + "\n Cupos: "
+				+ cupo + "\n Tipo de atracción: " + tipo + "\n ------------------------";
 	}
 
 	public boolean estaEnItinerario(Itinerario itinerario) {
@@ -88,6 +104,7 @@ public class Atraccion implements Mostrable, Comparable<Atraccion> {
 
 		return this.tiempoNecesario.compareTo(otraAtraccion.tiempoNecesario);
 	}
+
 	@Override
 	public Integer getCupo() {
 		return this.cupo;
@@ -101,16 +118,56 @@ public class Atraccion implements Mostrable, Comparable<Atraccion> {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public void setCupo(Integer cupo) {
 		this.cupo = cupo;
 	}
-	
+
 	public void setTiempoNecesario(Double tiempoNecesario) {
 		this.tiempoNecesario = tiempoNecesario;
 	}
-	
+
 	public void setCosto(Integer costo) {
 		this.costo = costo;
+	}
+
+	public boolean isValid() {
+		this.validate();
+		return errors.isEmpty();
+	}
+
+	private void validate() {
+		
+		errors = new HashMap<String, String>();
+		if (this.costo <= 0) {
+			errors.put("costo", "Debe ser positivo");
+		}
+		if (this.tiempoNecesario <= 0) {
+			errors.put("tiempo requerido", "Debe ser positivo");
+		}
+		if (this.cupo <= 0) {
+			errors.put("cupo", "Debe ser positivo");
+		}
+
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setTipo(TipoDeAtraccion tipo) {
+		this.tipo = tipo;		
 	}
 }

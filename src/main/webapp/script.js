@@ -1,20 +1,20 @@
-	(function() {
-		'use strict'
+(function() {
+	'use strict'
 
-		var forms = document.querySelectorAll('.needs-validation')
+	var forms = document.querySelectorAll('.needs-validation')
 
-		Array.prototype.slice.call(forms)
-			.forEach(function(form) {
-				form.addEventListener('submit', function(event) {
-					if (!form.checkValidity()) {
-						event.preventDefault()
-						event.stopPropagation()
-					}
+	Array.prototype.slice.call(forms)
+		.forEach(function(form) {
+			form.addEventListener('submit', function(event) {
+				if (!form.checkValidity()) {
+					event.preventDefault()
+					event.stopPropagation()
+				}
 
-					form.classList.add('was-validated')
-				}, false)
-			})
-	})
+				form.classList.add('was-validated')
+			}, false)
+		})
+})
 
 //Navbar shrink
 window.onscroll = function() {
@@ -33,3 +33,13 @@ window.onscroll = function() {
 		document.getElementById("botonLogin").style.transition = "0.4s";
 	}
 }
+
+$(function() {
+	$("#tipoDePromocion").change(function() {
+		if ($(option).val() === "sinElegir") {
+			$("#promoInput").hide;
+		} else {
+			$("#promoInput").show;
+		}
+	});
+});

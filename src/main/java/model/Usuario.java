@@ -1,5 +1,7 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import persistence.ItinerarioDAO;
@@ -10,6 +12,7 @@ import utils.Crypt;
 
 public class Usuario implements Comparable<Usuario> {
 
+	private int id;
 	private String nombre;
 	private int presupuesto;
 	private double tiempoDisponible;
@@ -19,14 +22,18 @@ public class Usuario implements Comparable<Usuario> {
 	private ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
 	private PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 	private String password;
-	
+	private boolean admin;
+	private Map<String, String> errors;
 
-	public Usuario(String nombre, int presupuesto, double tiempoDisponible, TipoDeAtraccion atraccionFavorita) {
+	public Usuario(int id, String nombre, int presupuesto, double tiempoDisponible, TipoDeAtraccion atraccionFavorita,
+			boolean admin) {
+		this.id = id;
 		this.nombre = nombre;
 		this.presupuesto = presupuesto;
 		this.tiempoDisponible = tiempoDisponible;
 		this.atraccionFavorita = atraccionFavorita;
 		this.itinerario = new Itinerario(this);
+		this.admin = admin;
 	}
 
 	public int getPresupuesto() {
@@ -39,6 +46,10 @@ public class Usuario implements Comparable<Usuario> {
 
 	public TipoDeAtraccion getAtraccionFavorita() {
 		return atraccionFavorita;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public Itinerario getItinerario() {
@@ -85,6 +96,7 @@ public class Usuario implements Comparable<Usuario> {
 	public int hashCode() {
 		return Objects.hash(nombre);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -100,18 +112,64 @@ public class Usuario implements Comparable<Usuario> {
 	public void setItinerario(Itinerario itinerario) {
 		this.itinerario = itinerario;
 	}
-	
+
 	public boolean isNull() {
 		return false;
 	}
-	
+
 	public boolean checkPassword(String password) {
 		// this.password en realidad es el hash del password
 		return Crypt.match(password, this.password);
 	}
-	
-	public boolean puedeComprar(Atraccion atraccion) {
-		return (atraccion.getCupo() >=1 && this.presupuesto >= atraccion.getCosto() && this.tiempoDisponible >= atraccion.getTiempoNecesario());
+
+	public boolean puedeComprar(Mostrable mostrable) {
+		return (mostrable.getCupo() >= 1 && this.presupuesto >= mostrable.getCosto()
+				&& this.tiempoDisponible >= mostrable.getTiempoNecesario()
+				&& !this.itinerario.getAtraccionesAceptadas().contains(mostrable)
+				&& !this.itinerario.getPromocionesAceptadas().contains(mostrable));
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setPresupuesto(int presupuesto) {
+		this.presupuesto = presupuesto;
+	}
+
+	public void setTiempoDisponible(double tiempoDisponible) {
+		this.tiempoDisponible = tiempoDisponible;
+	}
+
+	public void setAtraccionFavorita(TipoDeAtraccion atraccionFavorita) {
+		this.atraccionFavorita = atraccionFavorita;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public boolean isValid() {
+		this.validate();
+		return errors.isEmpty();
+	}
+
+	private void validate() {
+
+		errors = new HashMap<String, String>();
+		if (this.presupuesto < 0) {
+			errors.put("costo", "Debe ser positivo");
+		}
+		if (this.tiempoDisponible < 0) {
+			errors.put("tiempo requerido", "Debe ser positivo");
+		}
+	}
 }

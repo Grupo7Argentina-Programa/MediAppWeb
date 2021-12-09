@@ -15,16 +15,22 @@
 			style="text-align-last: end">
 			<div class="navbar-nav">
 				<a href="index.jsp" class="nav-item nav-link">Inicio</a> <a
-					href="atracciones.jsp" class="nav-item nav-link">Atracciones</a> <a
-					href="promociones.jsp" class="nav-item nav-link">Promociones</a>
-				<div class="dropdown">
-					<button class="dropbtn">Administrador</button>
-					<div class="dropdown-content">
-						<a href="listado-atracciones.do">Atracciones</a> <a
-							href="listado-promociones.do">Promociones</a> <a
-							href="listado-usuarios.do">Usuarios</a>
+					href="atracciones.do" class="nav-item nav-link">Atracciones</a> <a
+					href="promociones.do" class="nav-item nav-link">Promociones</a>
+				<c:if test="${usuario.admin}">
+					<div class="dropdown">
+						<button class="dropbtn">Administrador</button>
+						<div class="dropdown-content">
+							<a style="text-align: end" href="listado-atracciones.do">Atracciones</a>
+							<a href="listado-promociones.do">Promociones</a>
+							<!--  <a
+								href="listado-tipos.do">Tipos de atracción</a>-->
+							<a href="listado-usuarios.do">Usuarios</a> <a
+								href="alta-atraccion.do">Alta de atracción</a><a
+								href="alta-promocion.do">Alta de promoción</a>
+						</div>
 					</div>
-				</div>
+				</c:if>
 
 				<c:choose>
 					<c:when test="${usuario != null}">
@@ -43,8 +49,10 @@
 								<span class="visually-hidden">Toggle Dropdown</span>
 							</button>
 							<ul class="dropdown-menu" style="left: -39px">
-								<li><a class="dropdown-item" href="#"><c:out value="${usuario.presupuesto}"></c:out> monedas</a></li>
-								<li><a class="dropdown-item" href="#"><c:out value="${usuario.tiempoDisponible}"></c:out> horas</a></li>
+								<li><a class="dropdown-item" href="#"><c:out
+											value="${usuario.presupuesto}"></c:out> monedas</a></li>
+								<li><a class="dropdown-item" href="#"><c:out
+											value="${usuario.tiempoDisponible}"></c:out> horas</a></li>
 								<li><hr class="dropdown-divider"></li>
 								<li><a class="dropdown-item" href="logout">Cerrar
 										sesión</a></li>
