@@ -54,16 +54,19 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 		switch (resultados.getString("tipoDePromocion")) {
 		case "Porcentual":
-			promo = new Porcentual(resultados.getInt(1), resultados.getString(2), resultados.getInt(4), atraccion1, atraccion2);
+			promo = new Porcentual(resultados.getInt(1), resultados.getString(2), resultados.getInt(4), atraccion1,
+					atraccion2);
 			break;
 		case "AxB":
 			if (resultados.getString(9) != null)
-				promo = new AxB(resultados.getInt(1), resultados.getString(2), atraccion1, atraccion2, atraccion3, atraccion4);
+				promo = new AxB(resultados.getInt(1), resultados.getString(2), atraccion1, atraccion2, atraccion3,
+						atraccion4);
 			else
 				promo = new AxB(resultados.getInt(1), resultados.getString(2), atraccion1, atraccion2, atraccion3);
 			break;
 		case "Absoluta":
-			promo = new Absoluta(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), atraccion1, atraccion2);
+			promo = new Absoluta(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), atraccion1,
+					atraccion2);
 			break;
 		}
 		return promo;
@@ -98,8 +101,8 @@ public class PromocionDAOImpl implements PromocionDAO {
 			statement.setDouble(4, promocion.getTiempoNecesario());
 			statement.setString(5, promocion.getAtraccion1().getNombre());
 			statement.setString(6, promocion.getAtraccion2().getNombre());
-			statement.setString(7,(promocion.getAtraccion3() == null) ? null : promocion.getAtraccion3().getNombre());
-			statement.setString(8,(promocion.getAtraccion4() == null) ? null : promocion.getAtraccion4().getNombre());
+			statement.setString(7, (promocion.getAtraccion3() == null) ? null : promocion.getAtraccion3().getNombre());
+			statement.setString(8, (promocion.getAtraccion4() == null) ? null : promocion.getAtraccion4().getNombre());
 			statement.setString(9, promocion.getTipo().name().toLowerCase());
 			statement.setString(10, promocion.getTipoDePromocion());
 			int rows = statement.executeUpdate();
@@ -112,18 +115,37 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	@Override
 	public int update(Promocion promocion) {
-		// Creer�a que no hay que actualizar nada
-		return 0;
+		try {
+			String sql = "UPDATE PROMOCIONES SET NOMBRE = ?, COSTO = ?, DESCUENTO = ?, DURACION = ?, ATRACCION1 = ?, ATRACCION2 = ?, ATRACCION3 = ?, ATRACCION4 = ?, TIPODEATRACCION = ?, TIPODEPROMOCION = ? WHERE ID = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, promocion.getNombre());
+			statement.setInt(2, promocion.getCosto());
+			statement.setInt(3, promocion.getDescuento());
+			statement.setDouble(4, promocion.getTiempoNecesario());
+			statement.setString(5, promocion.getAtraccion1().getNombre());
+			statement.setString(6, promocion.getAtraccion2().getNombre());
+			statement.setString(7, (promocion.getAtraccion3() == null) ? null : promocion.getAtraccion3().getNombre());
+			statement.setString(8, (promocion.getAtraccion4() == null) ? null : promocion.getAtraccion4().getNombre());
+			statement.setString(9, promocion.getTipo().name().toLowerCase());
+			statement.setString(10, promocion.getTipoDePromocion());
+			statement.setInt(11, promocion.getId());
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override
 	public int delete(Promocion promocion) {
 		try {
-			String sql = "DELETE FROM PROMOCIONES WHERE NOMBRE = ?";
+			String sql = "DELETE FROM PROMOCIONES WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, promocion.getNombre());
+			statement.setInt(1, promocion.getId());
 			int rows = statement.executeUpdate();
 
 			return rows;

@@ -64,13 +64,12 @@ public class PromocionService {
 		return promocion;
 	}
 
-	/*
-	 * public void delete(Integer id) { Promocion promocion = new Promocion(null,
-	 * null, null, null, null);
-	 * 
-	 * PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
-	 * promocionDAO.delete(promocion); }
-	 */
+	public void delete(Integer id) {
+		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+
+		Promocion promocion = promocionDAO.find(id);
+		promocionDAO.delete(promocion);
+	}
 
 	public Promocion find(Integer id) {
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();

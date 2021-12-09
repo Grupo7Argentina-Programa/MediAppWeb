@@ -43,22 +43,30 @@
 						<c:forEach items="${atracciones}" var="atraccion">
 							<tr>
 								<td><c:out value="${atraccion.id}"></c:out></td>
-								<td><strong><c:out value="${atraccion.nombre}"></c:out></strong>
-									<div id="module" class="container">
-										<p class="collapse" id="collapseExample" aria-expanded="false">
+								<td>
+								<strong><c:out value="${atraccion.nombre}"></c:out></strong>
+									<br>
+									<a role="button" class="collapsed" data-bs-toggle="collapse"
+										href="#descripcionAtraccion${atraccion.id }" aria-expanded="false"
+										aria-controls="descripcionAtraccion${atraccion.id }">Ver descripción</a>
+								
+
+										<p class="collapse" id="descripcionAtraccion${atraccion.id }" aria-expanded="false">
 											<c:out value="${atraccion.descripcion}">Ver descripción</c:out>
 										</p>
-										<a role="button" class="collapsed" data-toggle="collapse"
-											href="#collapseExample" aria-expanded="false"
-											aria-controls="collapseExample"></a>
-									</div></td>
+
+									
+									</td>
 								<td>$ <c:out value="${atraccion.costo}"></c:out></td>
 								<td><c:out value="${atraccion.tiempoNecesario}"></c:out>
 									horas</td>
 								<td><c:out value="${atraccion.cupo}"></c:out></td>
 								<td><c:out value="${atraccion.tipo}"></c:out></td>
 
-								<td style="text-align: center;"><c:choose>
+								<td style="text-align: center;"><a
+									href="atraccion.do?id=${atraccion.id}"
+									class="btn btn-light rounded-0" role="button">Ver más<i
+										class="bi bi-pencil-fill"></i></a> <c:choose>
 										<c:when test="${usuario.puedeComprar(atraccion)}">
 											<a href="#" class="btn btn-success rounded" role="button">Comprar</a>
 										</c:when>
@@ -70,7 +78,8 @@
 										<a href="edit-atraccion.do?id=${atraccion.id}"
 											class="btn btn-light rounded-0" role="button">Editar<i
 											class="bi bi-pencil-fill"></i></a>
-										<a href="#" class="btn btn-danger rounded" role="button">Borrar<i
+										<a href="delete-atraccion.do?id=${atraccion.id}"
+											class="btn btn-danger rounded" role="button">Borrar<i
 											class="bi bi-x-circle-fill"></i></a>
 									</c:if></td>
 							</tr>

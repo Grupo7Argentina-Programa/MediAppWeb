@@ -1,11 +1,8 @@
 package services;
 
 import java.util.List;
-import model.NombreInvalido;
-import model.TiempoInvalido;
 import model.TipoDeAtraccion;
 import model.Usuario;
-import model.ValorInvalido;
 import persistence.UserDAO;
 import persistence.common.DAOFactory;
 
@@ -41,10 +38,11 @@ public class UsuarioService {
 		return usuario;
 	}
 
-	public void delete(Integer id) throws ValorInvalido, NombreInvalido, TiempoInvalido {
+	public void delete(Integer id) {
 		Usuario usuario = new Usuario(-1, "", 0, 0, null, false);
-
 		UserDAO userDAO = DAOFactory.getUserDAO();
+		
+		usuario = userDAO.find(id);
 		userDAO.delete(usuario);
 	}
 

@@ -55,9 +55,11 @@
 												role="button">No se puede comprar</a>
 										</c:otherwise>
 									</c:choose> <c:if test="${usuario.isAdmin()}">
-										<a href="edit-promocion.do?id=${promocion.id}" class="btn btn-light rounded-0" role="button">Editar<i
+										<a href="edit-promocion.do?id=${promocion.id}"
+											class="btn btn-light rounded-0" role="button">Editar<i
 											class="bi bi-pencil-fill"></i></a>
-										<a href="#" class="btn btn-danger rounded" role="button">Borrar<i
+										<a href="delete-promocion.do?id=${promocion.id}"
+											class="btn btn-danger rounded" role="button">Borrar<i
 											class="bi bi-x-circle-fill"></i></a>
 									</c:if></td>
 							</tr>

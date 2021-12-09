@@ -55,11 +55,11 @@ public class UserDAOImpl implements UserDAO {
 
 	public int delete(Usuario user) {
 		try {
-			String sql = "DELETE FROM USUARIOS WHERE NOMBRE = ?";
+			String sql = "DELETE FROM USUARIOS WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, user.getNombre());
+			statement.setInt(1, user.getId());
 			int rows = statement.executeUpdate();
 
 			return rows;

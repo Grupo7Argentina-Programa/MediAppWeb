@@ -2,10 +2,7 @@ package services;
 
 import java.util.List;
 import model.Atraccion;
-import model.NombreInvalido;
-import model.TiempoInvalido;
 import model.TipoDeAtraccion;
-import model.ValorInvalido;
 import persistence.AtraccionDAO;
 import persistence.common.DAOFactory;
 
@@ -51,10 +48,12 @@ public class AtraccionService {
 		return atraccion;
 	}
 
-	public void delete(Integer id) throws ValorInvalido, NombreInvalido, TiempoInvalido {
-		Atraccion atraccion = new Atraccion(null, null, null, null, null, null, null);
-
+	public void delete(Integer id) {
+		Atraccion atraccion = new Atraccion(-1, "", 0, 0.0, 0, null, "");
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+		
+		atraccion = atraccionDAO.find(id);
+		
 		atraccionDAO.delete(atraccion);
 	}
 

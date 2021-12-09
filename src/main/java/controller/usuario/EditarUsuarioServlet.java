@@ -10,10 +10,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Atraccion;
 import model.TipoDeAtraccion;
 import model.Usuario;
-import services.AtraccionService;
 import services.TiposDeAtraccionService;
 import services.UsuarioService;
 
