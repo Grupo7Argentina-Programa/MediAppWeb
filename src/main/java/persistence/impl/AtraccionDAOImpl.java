@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import model.TipoDeAtraccion;
@@ -26,7 +27,8 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			while (resultados.next()) {
 				atracciones.add(toAtraccion(resultados));
 			}
-
+			Collections.sort(atracciones);
+			Collections.reverse(atracciones);
 			return atracciones;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
