@@ -25,9 +25,7 @@
 							<a href="listado-promociones.do">Promociones</a>
 							<!--  <a
 								href="listado-tipos.do">Tipos de atracción</a>-->
-							<a href="listado-usuarios.do">Usuarios</a> <a
-								href="alta-atraccion.do">Alta de atracción</a><a
-								href="alta-promocion.do">Alta de promoción</a>
+							<a href="listado-usuarios.do">Usuarios</a>
 						</div>
 					</div>
 				</c:if>

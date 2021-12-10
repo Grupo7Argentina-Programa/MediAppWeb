@@ -36,7 +36,7 @@
 						</div>
 					</div>
 					<c:forEach items="${promociones }" var="promocion">
-						<div class="carousel-item" data-bs-interval="2000">
+						<div class="carousel-item" data-bs-interval="5000">
 							<a href="promocion.do?id=${promocion.id }"><img
 								src="resources/promocion-carrousel.jpg" class="d-block w-100"
 								alt="${promocion.nombre }"></a>
@@ -55,6 +55,7 @@
 										<c:out value=", ${promocion.atraccion4.nombre }"></c:out>
 									</c:if>
 								</h6>
+								 <a href="promocion.do?id=${promocion.id }" class="btn btn-primary">Ver promo</a>
 							</div>
 						</div>
 					</c:forEach>
@@ -81,7 +82,7 @@
 			<c:forEach items="${atracciones }" var="atraccion">
 
 				<div class="col">
-					<div class="card" style="width: 300px">
+					<div class="card h-100">
 						<img class="card h-50"
 							src="resources/${atraccion.nombre.toLowerCase()}.png">
 						<h1 style="padding-top: 5px; padding-left: 15px; font-size: 30px;">

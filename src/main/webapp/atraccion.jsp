@@ -20,7 +20,8 @@
 					<h1 style="color: white">
 						<c:out value="${atraccion.nombre}"></c:out>
 					</h1>
-					<h2 style="color: white"> $
+					<h2 style="color: white">
+						$
 						<c:out value="${atraccion.costo}"></c:out>
 					</h2>
 					<p class=small style="color: white">
@@ -29,8 +30,8 @@
 								<c:out value="${atraccion.descripcion}"></c:out>
 							</c:when>
 							<c:otherwise>
-								<p class="small fst-italic" style="color: white">Bueno, parece que el programador se
-									olvidó de poner una descripción...</p>
+								<p class="small fst-italic" style="color: white">Bueno,
+									parece que el programador se olvidó de poner una descripción...</p>
 								<img alt="programador de siesta"
 									src="resources/programador_dormido.jpg"
 									style="width: 18rem; align-self: center;">
@@ -38,16 +39,30 @@
 						</c:choose>
 					</p>
 					<div class="btn-group">
-						<button type="button" class="btn btn-primary" style="margin: 5px">Comprar</button>
-						<button type="button" class="btn btn-light" style="margin: 5px">Añadir
-							al carrito</button>
+						<c:choose>
+							<c:when
+								test="${usuario.puedeComprar(atraccion) &&
+														usuario.puedeAsistir(atraccion) &&
+														!usuario.enItinerario(atraccion)}">
+								<a href="comprar-atraccion.do?id=${atraccion.id}"  style="padding-right:5px"><button
+										type="button" class="btn btn-success rounded">Comprar</button></a>
+								<a href="#"><button type="button"
+										class="btn btn-outline-success rounded">Añadir al
+										carrito</button></a>
+							</c:when>
+							<c:otherwise>
+								<a href="#" class="btn btn-secondary rounded disabled"
+									role="button">Comprar</a>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 
 				<div class="col-8">
 					<div class="card">
 						<img src="resources/${atraccion.nombre.toLowerCase()}.png"
-							class="card-img-top img-fluid w-50" alt="${atraccion.nombre }" style="align-self: center">
+							class="card-img-top img-fluid w-50" alt="${atraccion.nombre }"
+							style="align-self: center">
 					</div>
 				</div>
 			</div>

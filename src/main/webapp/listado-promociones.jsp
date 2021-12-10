@@ -18,6 +18,11 @@
 
 		<div class="container">
 			<c:if test="${usuario.isAdmin()}">
+
+					<a href="alta-promocion.do" class="button" type="button" style="padding-bottom:3px">
+						<button class="btn btn-primary" type="button">Crear
+							promoción</button></a>
+
 				<table class="table table-dark table-hover">
 					<thead>
 						<tr>
@@ -47,11 +52,11 @@
 								<td style="text-align: center;"><a
 									href="promocion.do?id=${promocion.id}"
 									class="btn btn-light rounded" role="button">Ver más<i
-										class="bi bi-pencil-fill"></i></a>
-										<c:if
+										class="bi bi-pencil-fill"></i></a> <c:if
 										test="${usuario.isAdmin()}" /> <c:choose>
 
-										<c:when test="${usuario.puedeComprar(promocion) &&
+										<c:when
+											test="${usuario.puedeComprar(promocion) &&
 														usuario.puedeAsistir(promocion) &&
 														!usuario.enItinerario(promocion)}">
 											<a href="comprar-promocion.do?id=${promocion.id}"
@@ -59,7 +64,7 @@
 										</c:when>
 										<c:otherwise>
 											<a href="#" class="btn btn-secondary rounded disabled"
-												role="button">No se puede comprar</a>
+												role="button">Comprar</a>
 										</c:otherwise>
 									</c:choose> <c:if test="${usuario.isAdmin()}">
 										<a href="edit-promocion.do?id=${promocion.id}"

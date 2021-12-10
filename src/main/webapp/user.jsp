@@ -76,8 +76,10 @@
 						var="atraccion">
 						<div class="row g-0">
 							<div class="col-md-4">
-								<img src="resources/producto.png"
-									class="img-fluid rounded-start" alt="...">
+								<a href ="atraccion.do?id=${atraccion.id}"> <img
+									src="resources/${atraccion.nombre.toLowerCase()}.png"
+									class="img-fluid rounded-start" alt="${atraccion.nombre}">
+								</a>
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">

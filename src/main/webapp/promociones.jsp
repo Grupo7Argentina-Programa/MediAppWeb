@@ -27,14 +27,18 @@
 			</p>
 		</div>
 	</c:if>
-	<main class="container-fluid" style="padding-bottom: 30px;">
-		<div class="album py-5 bg-dark">
+	<main class="container" style="padding-bottom: 30px;">
+		<h1 style="color: white">
+			<c:out value="Bonito día, ${usuario.nombre }"></c:out>
+		</h1>
+		<h2 style="color: white">Tenés estas promociones disponibles</h2>
+
 			<div class="container">
 
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 					<c:forEach items="${promociones}" var="promocion">
 						<div class="col">
-							<div class="card shadow-sm">
+							<div class="card shadow-sm h-100">
 								<div id="carouselExampleControls" class="carousel slide"
 									data-bs-ride="carousel">
 									<div class="carousel-inner">
@@ -97,7 +101,7 @@
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="btn-group">
 											<a href="promocion.do?id=${promocion.id	}"
-												class="btn btn-light rounded" role="button">Ver<i
+												class="btn btn-success rounded" role="button">Ver<i
 												class="bi bi-pencil-fill"></i></a>
 											<button type="button"
 												class="btn btn-sm btn-outline-secondary">Añadir al
@@ -110,7 +114,7 @@
 					</c:forEach>
 				</div>
 			</div>
-		</div>
+
 	</main>
 </body>
 
