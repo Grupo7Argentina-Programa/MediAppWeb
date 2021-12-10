@@ -16,7 +16,16 @@
 
 	<main class="container font-roboto"
 		style="text-align: -webkit-center; width: max-content; padding-top: 30px">
-
+		<c:if test="${flash != null}">
+			<div class="alert alert-success alert-dismissible fade show"
+				role="alert">
+				<p>
+					<c:out value="${flash}" />
+				</p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+					aria-label="Close"></button>
+			</div>
+		</c:if>
 
 		<div class="row row-cols-md-1 row-cols-lg-2">
 			<div class="col-4">
@@ -50,12 +59,19 @@
 			<div class="col-8">
 				<!-- Caja de itinerario -->
 				<div class="card mb-3" style="max-width: 540px;">
-					<c:if test="${usuario.itinerario.atraccionesAceptadas.isEmpty() }">
+					<c:choose>
+						<c:when test="${usuario.itinerario.atraccionesAceptadas.isEmpty() }">
+							<div class="row g-0">
+								<h5>Vaya, parece que todavía no hay nada.</h5>
+								<h6>Cuando compres una atracción la podrás encontrar aquí.</h6>
+							</div>
+						</c:when>
+						<c:otherwise>
 						<div class="row g-0">
-							<h5>Vaya, parece que todavía no hay nada.</h5>
-							<h6>Cuando compres una atracción la podrás encontrar aquí.</h6>
-						</div>
-					</c:if>
+								<h3 style="padding-bottom: 30px; padding-top:20px">Este es tu itinerario</h3>
+							</div>
+						</c:otherwise>
+					</c:choose>
 					<c:forEach items="${usuario.itinerario.atraccionesAceptadas}"
 						var="atraccion">
 						<div class="row g-0">

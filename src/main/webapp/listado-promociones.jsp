@@ -44,11 +44,18 @@
 									</p></td>
 								<td>$ <c:out value="${promocion.costo}"></c:out></td>
 
-								<td style="text-align: center;"><c:if
-										test="${user.isAdmin()}" /> <c:choose>
+								<td style="text-align: center;"><a
+									href="promocion.do?id=${promocion.id}"
+									class="btn btn-light rounded" role="button">Ver más<i
+										class="bi bi-pencil-fill"></i></a>
+										<c:if
+										test="${usuario.isAdmin()}" /> <c:choose>
 
-										<c:when test="${usuario.puedeComprar(promocion)}">
-											<a href="#" class="btn btn-success rounded" role="button">Comprar</a>
+										<c:when test="${usuario.puedeComprar(promocion) &&
+														usuario.puedeAsistir(promocion) &&
+														!usuario.enItinerario(promocion)}">
+											<a href="comprar-promocion.do?id=${promocion.id}"
+												class="btn btn-success rounded" role="button">Comprar</a>
 										</c:when>
 										<c:otherwise>
 											<a href="#" class="btn btn-secondary rounded disabled"

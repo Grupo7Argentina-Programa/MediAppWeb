@@ -13,7 +13,20 @@
 
 <body class="texto"
 	style="background-color: #000000; padding-top: 140px;">
-
+	<c:if test="${flash != null}">
+		<div class="alert alert-danger">
+			<p>
+				<c:out value="${flash}" />
+				<c:if test="${errors != null}">
+					<ul>
+						<c:forEach items="${errors}" var="entry">
+							<li><c:out value="${entry.getValue()}"></c:out></li>
+						</c:forEach>
+					</ul>
+				</c:if>
+			</p>
+		</div>
+	</c:if>
 	<main class="container-fluid" style="padding-bottom: 30px;">
 		<div class="album py-5 bg-dark">
 			<div class="container">
@@ -25,18 +38,39 @@
 								<div id="carouselExampleControls" class="carousel slide"
 									data-bs-ride="carousel">
 									<div class="carousel-inner">
+
 										<div class="carousel-item active">
-											<img src="resources/erebor.png" class="d-block w-100"
-												alt="...">
+											<img
+												src="resources/${promocion.atraccion1.nombre.toLowerCase()}.png"
+												class="d-block w-100"
+												alt="${promocion.atraccion1.nombre.toLowerCase()}">
 										</div>
+
 										<div class="carousel-item">
-											<img src="resources/lacomarca.png" class="d-block w-100"
-												alt="...">
+											<img
+												src="resources/${promocion.atraccion2.nombre.toLowerCase()}.png"
+												class="d-block w-100"
+												alt="${promocion.atraccion2.nombre.toLowerCase()}">
 										</div>
-										<div class="carousel-item">
-											<img src="resources/bosquenegro.png" class="d-block w-100"
-												alt="..."></img>
-										</div>
+
+										<c:if test="${promocion.atraccion3 != null}">
+											<div class="carousel-item">
+												<img
+													src="resources/${promocion.atraccion3.nombre.toLowerCase()}.png"
+													class="d-block w-100"
+													alt="${promocion.atraccion3.nombre.toLowerCase()}"></img>
+											</div>
+										</c:if>
+
+										<c:if test="${promocion.atraccion4 != null}">
+											<div class="carousel-item">
+												<img
+													src="resources/${promocion.atraccion4.nombre.toLowerCase()}.png"
+													class="d-block w-100"
+													alt="${promocion.atraccion4.nombre.toLowerCase()}"></img>
+											</div>
+										</c:if>
+
 									</div>
 									<h2 id="precio" style="padding-top: 15px; padding-left: 15px">
 										<c:out value="$ ${promocion.costo}"></c:out>
@@ -62,8 +96,9 @@
 									</p>
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="btn-group">
-											<button type="button"
-												class="btn btn-sm btn-outline-secondary">Ver</button>
+											<a href="promocion.do?id=${promocion.id	}"
+												class="btn btn-light rounded" role="button">Ver<i
+												class="bi bi-pencil-fill"></i></a>
 											<button type="button"
 												class="btn btn-sm btn-outline-secondary">Añadir al
 												carrito</button>

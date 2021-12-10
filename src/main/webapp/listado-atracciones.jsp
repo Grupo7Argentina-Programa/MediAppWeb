@@ -16,6 +16,7 @@
 
 	<main class="container-fluid" style="padding-bottom: 30px;">
 
+		<input type="hidden" name="usuario" value="${usuario}">
 		<div class="container">
 			<c:if test="${flash != null}">
 				<div class="alert alert-warning alert-dismissible fade show"
@@ -43,20 +44,19 @@
 						<c:forEach items="${atracciones}" var="atraccion">
 							<tr>
 								<td><c:out value="${atraccion.id}"></c:out></td>
-								<td>
-								<strong><c:out value="${atraccion.nombre}"></c:out></strong>
-									<br>
-									<a role="button" class="collapsed" data-bs-toggle="collapse"
-										href="#descripcionAtraccion${atraccion.id }" aria-expanded="false"
-										aria-controls="descripcionAtraccion${atraccion.id }">Ver descripción</a>
-								
+								<td><strong><c:out value="${atraccion.nombre}"></c:out></strong>
+									<br> <a role="button" class="collapsed"
+									data-bs-toggle="collapse"
+									href="#descripcionAtraccion${atraccion.id }"
+									aria-expanded="false"
+									aria-controls="descripcionAtraccion${atraccion.id }">Ver
+										descripción</a>
 
-										<p class="collapse" id="descripcionAtraccion${atraccion.id }" aria-expanded="false">
-											<c:out value="${atraccion.descripcion}">Ver descripción</c:out>
-										</p>
 
-									
-									</td>
+									<p class="collapse" id="descripcionAtraccion${atraccion.id }"
+										aria-expanded="false">
+										<c:out value="${atraccion.descripcion}">Ver descripción</c:out>
+									</p></td>
 								<td>$ <c:out value="${atraccion.costo}"></c:out></td>
 								<td><c:out value="${atraccion.tiempoNecesario}"></c:out>
 									horas</td>
@@ -65,10 +65,14 @@
 
 								<td style="text-align: center;"><a
 									href="atraccion.do?id=${atraccion.id}"
-									class="btn btn-light rounded-0" role="button">Ver más<i
+									class="btn btn-light rounded" role="button">Ver más<i
 										class="bi bi-pencil-fill"></i></a> <c:choose>
-										<c:when test="${usuario.puedeComprar(atraccion)}">
-											<a href="#" class="btn btn-success rounded" role="button">Comprar</a>
+										<c:when
+											test="${usuario.puedeComprar(atraccion) &&
+														usuario.puedeAsistir(atraccion) &&
+														!usuario.enItinerario(atraccion)}">
+											<a href="comprar-atraccion.do?id=${atraccion.id}"
+												class="btn btn-success rounded" role="button">Comprar</a>
 										</c:when>
 										<c:otherwise>
 											<a href="#" class="btn btn-secondary rounded disabled"
@@ -76,7 +80,7 @@
 										</c:otherwise>
 									</c:choose> <c:if test="${usuario.isAdmin()}">
 										<a href="edit-atraccion.do?id=${atraccion.id}"
-											class="btn btn-light rounded-0" role="button">Editar<i
+											class="btn btn-light rounded" role="button">Editar<i
 											class="bi bi-pencil-fill"></i></a>
 										<a href="delete-atraccion.do?id=${atraccion.id}"
 											class="btn btn-danger rounded" role="button">Borrar<i

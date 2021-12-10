@@ -18,23 +18,24 @@
 		<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 			<c:forEach items="${atracciones}" var="atraccion">
 				<div class="col">
-					<div class="card shadow-sm">
-						<img src="resources/erebor.png">
-						<rect width="25%" height="25%" fill="#55595c"></rect>
-						<h1 style="padding-top: 15px; padding-left: 15px">
+					<div class="card h-100">					
+						<img  class="card h-50"  src="resources/${atraccion.nombre.toLowerCase()}.png">
+						<h1 style="padding-top: 5px; padding-left: 15px; font-size:30px;"> 
 							<c:out value="${atraccion.nombre}"></c:out>
 						</h1>
-						<h2 id="precio" style="padding-top: 15px; padding-left: 15px">
+						<h2 id="precio" style="padding-top: 5px; padding-left: 15px">
 							$
 							<c:out value="${atraccion.costo}"></c:out>
 						</h2>
 						<div class="card-body">
-							<p class="card-atraccion">
-								<c:out value="${atraccion.tiempoNecesario} horas requeridas"></c:out>
-							</p>
+							<!--  <p class="card-atraccion"> -->
+							<h3 style="padding-top: 0px; padding-left: 5px; font-size:15px;"> 
+								<c:out value="${atraccion.tiempoNecesario} horas requeridas"></c:out> </h3>
+							<!--  </p> -->
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
+									<a href="atraccion.do?id=${atraccion.id}"
+										class="btn btn-success rounded" role="button">Ver</a>
 									<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
 										al carrito</button>
 								</div>
