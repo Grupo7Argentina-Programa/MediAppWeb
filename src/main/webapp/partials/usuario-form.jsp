@@ -15,29 +15,30 @@
 				aria-label="Tipo de atracción favorita" required>
 				<option selected disabled>Seleccione</option>
 				<c:forEach items="${tiposDeAtraccion}" var="tipoDeAtraccion">
-					<option value="${tipoDeAtraccion }"><c:out value="${tipoDeAtraccion}"></c:out></option>
+					<option value="${usuario.atraccionFavorita }"><c:out value="${tipoDeAtraccion }"></c:out></option>
 				</c:forEach>
 			</select>
 			<div class="invalid-feedback">Por favor seleccione un tipo</div>
 		</div>
 	</div>
-	<div class="col-md">
-		<div class="input-group mb-3">
-			<span class="input-group-text">$</span> <input type="number"
-				class="form-control" name="presupuesto" placeholder="Presupuesto" required
-				value="${usuario.presupuesto }">
-			<div class="invalid-feedback">Por favor ingrese un presupuesto válido</div>
-		</div>
+		<div class="col-md">
+			<div class="input-group mb-3">
+				<span class="input-group-text">$</span> <input type="number"
+					class="form-control" name="presupuesto" placeholder="Presupuesto"
+					required value="${usuario.presupuesto }">
+				<div class="invalid-feedback">Por favor ingrese un presupuesto
+					válido</div>
+			</div>
 
-		<div class="input-group mb-3">
-			<input type="number" class="form-control" name="tiempoDisponible"
-				placeholder="Tiempo disponible" required
-				value="${usuario.tiempoDisponible }">
-			<div class="invalid-feedback">Por favor ingresá un tiempo
-				válida</div>
-			<span class="input-group-text">horas</span>
+			<div class="input-group mb-3">
+				<input type="number" class="form-control" name="tiempoDisponible"
+					placeholder="Tiempo disponible" required
+					value="${usuario.tiempoDisponible }">
+				<div class="invalid-feedback">Por favor ingresá un tiempo
+					válida</div>
+				<span class="input-group-text">horas</span>
+			</div>
 		</div>
-	</div>
 </div>
 
 <div class="mb-3">

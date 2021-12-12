@@ -55,7 +55,8 @@
 										<c:out value=", ${promocion.atraccion4.nombre }"></c:out>
 									</c:if>
 								</h6>
-								 <a href="promocion.do?id=${promocion.id }" class="btn btn-primary">Ver promo</a>
+								<a href="promocion.do?id=${promocion.id }"
+									class="btn btn-primary">Ver promo</a>
 							</div>
 						</div>
 					</c:forEach>
@@ -72,52 +73,56 @@
 				<span class="visually-hidden">Next</span>
 			</button>
 			</div>
-		</c:if>
 
+			<div class=container>
+				<h2 style="color: white">¿No te convencen?</h2>
+				<h4 style="color: white">Entonces te ofrecemos estas
+					atracciones</h4>
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
 
-	</main>
-	<div class=container>
-		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+					<c:forEach items="${atracciones }" var="atraccion">
 
-			<c:forEach items="${atracciones }" var="atraccion">
+						<div class="col">
+							<div class="card h-100">
+								<img class="card h-50"
+									src="resources/${atraccion.nombre.toLowerCase()}.png">
+								<h1
+									style="padding-top: 5px; padding-left: 15px; font-size: 30px;">
+									<c:out value="${atraccion.nombre}"></c:out>
+								</h1>
+								<h2 id="precio" style="padding-top: 5px; padding-left: 15px">
+									$
+									<c:out value="${atraccion.costo}"></c:out>
+								</h2>
+								<div class="card-body">
+									<!--  <p class="card-atraccion"> -->
+									<h3
+										style="padding-top: 0px; padding-left: 5px; font-size: 15px;">
+										<c:out value="${atraccion.tiempoNecesario} horas requeridas"></c:out>
+									</h3>
+									<!--  </p> -->
 
-				<div class="col">
-					<div class="card h-100">
-						<img class="card h-50"
-							src="resources/${atraccion.nombre.toLowerCase()}.png">
-						<h1 style="padding-top: 5px; padding-left: 15px; font-size: 30px;">
-							<c:out value="${atraccion.nombre}"></c:out>
-						</h1>
-						<h2 id="precio" style="padding-top: 5px; padding-left: 15px">
-							$
-							<c:out value="${atraccion.costo}"></c:out>
-						</h2>
-						<div class="card-body">
-							<!--  <p class="card-atraccion"> -->
-							<h3 style="padding-top: 0px; padding-left: 5px; font-size: 15px;">
-								<c:out value="${atraccion.tiempoNecesario} horas requeridas"></c:out>
-							</h3>
-							<!--  </p> -->
+									<c:if test="${usuario != null }">
 
-							<c:if test="${usuario != null }">
-
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group">
-										<a href="atraccion.do?id=${atraccion.id}"
-											class="btn btn-success rounded" role="button">Ver</a>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
-											al carrito</button>
-									</div>
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="btn-group">
+												<a href="atraccion.do?id=${atraccion.id}"
+													class="btn btn-success rounded" role="button">Ver</a>
+												<button type="button"
+													class="btn btn-sm btn-outline-secondary">Añadir al
+													carrito</button>
+											</div>
+										</div>
+									</c:if>
 								</div>
-							</c:if>
+							</div>
 						</div>
-					</div>
+
+					</c:forEach>
 				</div>
-
-			</c:forEach>
-
-		</div>
-	</div>
+			</div>
+		</c:if>
+	</main>
 </body>
 
 </html>

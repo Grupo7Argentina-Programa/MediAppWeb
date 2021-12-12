@@ -19,9 +19,11 @@
 		<div class="container">
 			<c:if test="${usuario.isAdmin()}">
 
-					<a href="alta-promocion.do" class="button" type="button" style="padding-bottom:3px">
-						<button class="btn btn-primary" type="button">Crear
-							promoción</button></a>
+				<a href="alta-promocion.do" class="button" type="button"
+					style="padding-bottom: 3px">
+					<button class="btn btn-primary" type="button">Crear
+						promoción</button>
+				</a>
 
 				<table class="table table-dark table-hover">
 					<thead>
@@ -34,46 +36,97 @@
 					<tbody>
 						<c:forEach items="${promociones}" var="promocion">
 							<tr>
-								<td><c:out value="${promocion.id }"></c:out></td>
-								<td><strong><c:out value="${promocion.nombre}"></c:out></strong>
-									<p>
-										Atracciones incluidas:
-										<c:out value="${promocion.atraccion1.nombre}"></c:out>
-										<c:out value=", ${promocion.atraccion2.nombre}"></c:out>
-										<c:if test="${promocion.atraccion3 != null}">
-											<c:out value=", ${promocion.atraccion3.nombre}"></c:out>
-										</c:if>
-										<c:if test="${promocion.atraccion4 != null}">
-											<c:out value=", ${promocion.atraccion4.nombre}"></c:out>
-										</c:if>
-									</p></td>
-								<td>$ <c:out value="${promocion.costo}"></c:out></td>
+								<c:if
+									test="${usuario.atraccionFavorita.equals(promocion.atraccion1.tipo)}">
+									<td><c:out value="${promocion.id }"></c:out></td>
+									<td><strong><c:out value="${promocion.nombre}"></c:out></strong>
+										<p>
+											Atracciones incluidas:
+											<c:out value="${promocion.atraccion1.nombre}"></c:out>
+											<c:out value=", ${promocion.atraccion2.nombre}"></c:out>
+											<c:if test="${promocion.atraccion3 != null}">
+												<c:out value=", ${promocion.atraccion3.nombre}"></c:out>
+											</c:if>
+											<c:if test="${promocion.atraccion4 != null}">
+												<c:out value=", ${promocion.atraccion4.nombre}"></c:out>
+											</c:if>
+										</p></td>
+									<td>$ <c:out value="${promocion.costo}"></c:out></td>
 
-								<td style="text-align: center;"><a
-									href="promocion.do?id=${promocion.id}"
-									class="btn btn-light rounded" role="button">Ver más<i
-										class="bi bi-pencil-fill"></i></a> <c:if
-										test="${usuario.isAdmin()}" /> <c:choose>
+									<td style="text-align: center;"><a
+										href="promocion.do?id=${promocion.id}"
+										class="btn btn-light rounded" role="button">Ver más<i
+											class="bi bi-pencil-fill"></i></a> <c:if
+											test="${usuario.isAdmin()}" /> <c:choose>
 
-										<c:when
-											test="${usuario.puedeComprar(promocion) &&
+											<c:when
+												test="${usuario.puedeComprar(promocion) &&
 														usuario.puedeAsistir(promocion) &&
-														!usuario.enItinerario(promocion)}">
-											<a href="comprar-promocion.do?id=${promocion.id}"
-												class="btn btn-success rounded" role="button">Comprar</a>
-										</c:when>
-										<c:otherwise>
-											<a href="#" class="btn btn-secondary rounded disabled"
-												role="button">Comprar</a>
-										</c:otherwise>
-									</c:choose> <c:if test="${usuario.isAdmin()}">
-										<a href="edit-promocion.do?id=${promocion.id}"
-											class="btn btn-light rounded-0" role="button">Editar<i
-											class="bi bi-pencil-fill"></i></a>
-										<a href="delete-promocion.do?id=${promocion.id}"
-											class="btn btn-danger rounded" role="button">Borrar<i
-											class="bi bi-x-circle-fill"></i></a>
-									</c:if></td>
+														!promocion.estaEnItinerario(usuario.itinerario)}">
+												<a href="comprar-promocion.do?id=${promocion.id}"
+													class="btn btn-success rounded" role="button">Comprar</a>
+											</c:when>
+											<c:otherwise>
+												<a href="#" class="btn btn-secondary rounded disabled"
+													role="button">Comprar</a>
+											</c:otherwise>
+										</c:choose> <c:if test="${usuario.isAdmin()}">
+											<a href="edit-promocion.do?id=${promocion.id}"
+												class="btn btn-light rounded-0" role="button">Editar<i
+												class="bi bi-pencil-fill"></i></a>
+											<a href="delete-promocion.do?id=${promocion.id}"
+												class="btn btn-danger rounded" role="button">Borrar<i
+												class="bi bi-x-circle-fill"></i></a>
+										</c:if></td>
+								</c:if>
+							</tr>
+
+						</c:forEach>
+						<c:forEach items="${promociones}" var="promocion">
+							<tr>
+								<c:if
+									test="${!usuario.atraccionFavorita.equals(promocion.atraccion1.tipo)}">
+									<td><c:out value="${promocion.id }"></c:out></td>
+									<td><strong><c:out value="${promocion.nombre}"></c:out></strong>
+										<p>
+											Atracciones incluidas:
+											<c:out value="${promocion.atraccion1.nombre}"></c:out>
+											<c:out value=", ${promocion.atraccion2.nombre}"></c:out>
+											<c:if test="${promocion.atraccion3 != null}">
+												<c:out value=", ${promocion.atraccion3.nombre}"></c:out>
+											</c:if>
+											<c:if test="${promocion.atraccion4 != null}">
+												<c:out value=", ${promocion.atraccion4.nombre}"></c:out>
+											</c:if>
+										</p></td>
+									<td>$ <c:out value="${promocion.costo}"></c:out></td>
+
+									<td style="text-align: center;"><a
+										href="promocion.do?id=${promocion.id}"
+										class="btn btn-light rounded" role="button">Ver más<i
+											class="bi bi-pencil-fill"></i></a> <c:if
+											test="${usuario.isAdmin()}" /> <c:choose>
+
+											<c:when
+												test="${usuario.puedeComprar(promocion) &&
+														usuario.puedeAsistir(promocion) &&
+														!promocion.estaEnItinerario(usuario.itinerario)}">
+												<a href="comprar-promocion.do?id=${promocion.id}"
+													class="btn btn-success rounded" role="button">Comprar</a>
+											</c:when>
+											<c:otherwise>
+												<a href="#" class="btn btn-secondary rounded disabled"
+													role="button">Comprar</a>
+											</c:otherwise>
+										</c:choose> <c:if test="${usuario.isAdmin()}">
+											<a href="edit-promocion.do?id=${promocion.id}"
+												class="btn btn-light rounded-0" role="button">Editar<i
+												class="bi bi-pencil-fill"></i></a>
+											<a href="delete-promocion.do?id=${promocion.id}"
+												class="btn btn-danger rounded" role="button">Borrar<i
+												class="bi bi-x-circle-fill"></i></a>
+										</c:if></td>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</tbody>

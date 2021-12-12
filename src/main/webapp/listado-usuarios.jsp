@@ -32,16 +32,54 @@
 						<c:forEach items="${usuarios}" var="usuario">
 							<tr>
 								<td><c:out value="${usuario.id}"></c:out></td>
-								<td><strong><c:out value="${usuario.nombre}"></c:out></strong></td>
+								<td><strong><c:out value="${usuario.nombre}"></c:out></strong>
+									<br> <a role="button" class="collapsed"
+									data-bs-toggle="collapse"
+									href="#itinerarioUsuario${usuario.id }" aria-expanded="false"
+									aria-controls="ditinerarioUsuario${usuario.id }">Ver
+										Compras</a>
+									<ul class="collapse" id="itinerarioUsuario${usuario.id }"
+										aria-expanded="false">
+										<c:forEach items="${usuario.itinerario.promocionesAceptadas}"
+											var="atraccion">
+											<li><a href="promocion.do?id=${promocion.id}"> <c:out
+														value="${atraccion.nombre}"></c:out>
+											</a></li>
+										</c:forEach>
+										<c:forEach items="${usuario.itinerario.atraccionesAceptadas}"
+											var="atraccion">
+											<c:choose>
+												<c:when test="${usuario.itinerario.promocionesAceptadas.isEmpty() }">
+												
+												<li><a href="atraccion.do?id=${atraccion.id}"> <c:out
+															value="${atraccion.nombre}"></c:out>
+													</a></li>
+												
+												</c:when>
+												<c:otherwise>
+													<c:forEach
+														items="${usuario.itinerario.promocionesAceptadas}"
+														var="promocion">
+														<c:if
+															test="${!promocion.atracciones.contains(atraccion) }">
+															<li><a href="atraccion.do?id=${atraccion.id}"> <c:out
+																		value="${atraccion.nombre}"></c:out>
+															</a></li>
+														</c:if>
+													</c:forEach>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</ul></td>
 								<td><c:out value="${usuario.presupuesto}"></c:out></td>
 								<td><c:out value="${usuario.tiempoDisponible}"></c:out></td>
 								<td><c:out value="${usuario.atraccionFavorita}"></c:out></td>
-								<td><a href="edit-usuario.do?id=${usuario.id}"
-									class="btn btn-light rounded-0" role="button">Editar<i
-										class="bi bi-pencil-fill"></i></a>
-										<a href="delete-usuario.do?id=${usuario.id }"
+								<td><a href="delete-usuario.do?id=${usuario.id }"
 									class="btn btn-danger rounded" role="button">Borrar<i
-										class="bi bi-x-circle-fill"></i></a></td>
+										class="bi bi-x-circle-fill"></i></a> <a
+									href="edit-usuario.do?id=${usuario.id}"
+									class="btn btn-dark rounded-0" role="button">Editar<i
+										class="bi bi-pencil-fill"></i></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

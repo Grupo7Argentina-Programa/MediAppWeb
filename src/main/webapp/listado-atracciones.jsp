@@ -35,6 +35,11 @@
 					<button class="btn btn-primary" type="button">Crear
 						atracción</button>
 				</a>
+				<a href="alta-tipo-atraccion.do" class="button" type="button"
+					style="padding-bottom: 3px">
+					<button class="btn btn-primary" type="button">Crear
+						tipo de atracción</button>
+				</a>
 				<table class="table table-dark table-hover">
 					<thead>
 						<tr>
@@ -49,7 +54,7 @@
 					<tbody>
 						<c:forEach items="${atracciones}" var="atraccion">
 							<tr>
-								<c:if test="${usuario.atraccionFavorita == atraccion.tipo}">
+								<c:if test="${usuario.atraccionFavorita.equals(atraccion.tipo)}">
 									<td><c:out value="${atraccion.id}"></c:out></td>
 									<td><strong><c:out value="${atraccion.nombre}"></c:out></strong>
 										<br> <a role="button" class="collapsed"
@@ -87,7 +92,7 @@
 														usuario.puedeAsistir(atraccion) &&
 														!usuario.enItinerario(atraccion)}">
 												<a href="comprar-atraccion.do?id=${atraccion.id }"
-													class="btn btn-success rounded" role="button">Comprar</a>
+													class="btn btn-success rounded" role="button"><i class="bi bi-cart4"></i>Comprar</a>
 											</c:when>
 											<c:otherwise>
 												<a href="#" class="btn btn-secondary rounded disabled"
@@ -106,7 +111,7 @@
 						</c:forEach>
 						<c:forEach items="${atracciones}" var="atraccion">
 							<tr>
-								<c:if test="${usuario.atraccionFavorita != atraccion.tipo}">
+								<c:if test="${!usuario.atraccionFavorita.equals(atraccion.tipo)}">
 									<td><c:out value="${atraccion.id}"></c:out></td>
 									<td><strong><c:out value="${atraccion.nombre}"></c:out></strong>
 										<br> <a role="button" class="collapsed"

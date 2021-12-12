@@ -17,16 +17,12 @@
 	<main class="container"
 		style="text-align: -webkit-center; width: max-content; padding-top: 30px">
 
-			<c:if test="${flash != null}">
-				<div class="alert alert-warning alert-dismissible fade show"
-					role="alert">
-					<p>
-						<c:out value="${flash}" />
-					</p>
-					<button type="button" class="btn-close" data-bs-dismiss="alert"
-						aria-label="Close"></button>
-				</div>
-			</c:if>
+			<c:if test="${atraccion != null && !atraccion.isValid()}">
+			<div class="alert alert-danger">
+				<p>Se encontraron errores al crear la atracción.</p>
+			</div>
+		</c:if>
+		
 		<div>
 			<h2 style="color: white;">Ingrese los datos de la nueva
 				atracción</h2>

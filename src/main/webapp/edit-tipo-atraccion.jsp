@@ -7,8 +7,6 @@
 <head>
 <jsp:include page="partials/head.jsp"></jsp:include>
 <jsp:include page="partials/nav.jsp"></jsp:include>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 
@@ -18,21 +16,15 @@
 
 	<main class="container"
 		style="text-align: -webkit-center; width: max-content; padding-top: 30px">
-
-		<c:if test="${promocion != null && !promocion.isValid()}">
-			<div class="alert alert-danger">
-				<p>Se encontraron errores al crear la promoción.</p>
-			</div>
-		</c:if>
-
 		<div>
-			<h2 style="color: white;">Ingrese los datos de la nueva
-				promoción</h2>
+			<h2 style="color: white;">Ingrese los datos del nuevo tipo de
+				atracción</h2>
 		</div>
 
 		<form class="needs-validation" method="POST"
-			action="alta-promocion.do">
-			<jsp:include page="partials/promocion-form.jsp"></jsp:include>
+			action="edit-tipo-atraccion.do">
+			<input type="hidden" name="id" value="${tipoDeAtraccion.id}">
+			<jsp:include page="partials/tipo-atraccion-form.jsp"></jsp:include>
 		</form>
 	</main>
 </body>

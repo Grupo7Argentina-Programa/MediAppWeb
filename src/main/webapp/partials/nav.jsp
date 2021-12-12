@@ -22,10 +22,9 @@
 						<button class="dropbtn">Administrador</button>
 						<div class="dropdown-content">
 							<a style="text-align: end" href="listado-atracciones.do">Atracciones</a>
-							<a href="listado-promociones.do">Promociones</a>
-							<!--  <a
-								href="listado-tipos.do">Tipos de atracción</a>-->
-							<a href="listado-usuarios.do">Usuarios</a>
+							<a style="text-align: end" href="listado-promociones.do">Promociones</a>
+							<a style="text-align: end" href="listado-tipos.do">Tipos de atracción</a>
+							<a style="text-align: end" href="listado-usuarios.do">Usuarios</a>
 						</div>
 					</div>
 				</c:if>
@@ -36,20 +35,20 @@
 						<!-- Example split danger button -->
 						<div class="btn-group lg">
 							<a href="user.jsp">
-								<button type="button" class="btn btn-primary"
+								<button type="button" class="btn btn-dark"
 									style="min-width: 100px; text-align-last: center">
 									<c:out value="${usuario.nombre}"></c:out>
 								</button>
 							</a>
 							<button type="button"
-								class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+								class="btn btn-dark dropdown-toggle dropdown-toggle-split"
 								data-bs-toggle="dropdown" aria-expanded="false">
 								<span class="visually-hidden">Toggle Dropdown</span>
 							</button>
 							<ul class="dropdown-menu" style="left: -39px">
-								<li><a class="dropdown-item" href="#"><c:out
+								<li><a class="dropdown-item disabled" href="#"><c:out
 											value="${usuario.presupuesto}"></c:out> monedas</a></li>
-								<li><a class="dropdown-item" href="#"><c:out
+								<li><a class="dropdown-item disabled" href="#"><c:out
 											value="${usuario.tiempoDisponible}"></c:out> horas</a></li>
 								<li><hr class="dropdown-divider"></li>
 								<li><a class="dropdown-item" href="logout">Cerrar

@@ -27,7 +27,7 @@
 
 			<select name="atraccion1" class="form-select" id="promoInput"
 				aria-label="Atracción 1" required>
-				<option selected>Sin elegir</option>
+				<option selected disabled>Sin elegir</option>
 				<c:forEach items="${atracciones}" var="atraccion">
 					<option value="${atraccion.nombre}"><c:out
 							value="${atraccion.nombre}"></c:out></option>
@@ -39,7 +39,7 @@
 
 			<select name="atraccion2" class="form-select" id="promoInput"
 				aria-label="Atracción 2" required>
-				<option selected>Sin elegir</option>
+				<option selected disabled>Sin elegir</option>
 				<c:forEach items="${atracciones}" var="atraccion">
 					<option value="${atraccion.nombre}"><c:out
 							value="${atraccion.nombre}"></c:out></option>

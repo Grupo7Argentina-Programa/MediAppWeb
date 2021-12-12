@@ -28,12 +28,12 @@
 		</c:if>
 
 		<div class="row row-cols-md-1 row-cols-lg-2">
-			<div class="col-4">
+			<div class="col-8">
 				<!-- Caja de usuario y sus datos -->
 				<div class="card"
 					style="width: 18rem; align-items: center; margin: 10px;">
-					<img src="resources/usuario.png"
-						class="card-img-top img-fluid w-50 rounded-circle" alt="...">
+					<img src="resources/usuarios/${usuario.id}.png"
+						class="card-img-top img-fluid w-50 rounded-circle" alt="${usuario.nombre }">
 					<div class="card-body">
 						<h5 class="card-title">
 							<c:out value="${usuario.nombre}"></c:out>
@@ -49,16 +49,11 @@
 						<li class="list-group-item"><c:out
 								value="Tipo de atracción favorita: ${usuario.atraccionFavorita}"></c:out></li>
 					</ul>
-					<div class="card-body">
-						<a href="#" class="card-link">Card link</a> <a href="#"
-							class="card-link">Another link</a>
-					</div>
 				</div>
 
 			</div>
-			<div class="col-8">
-				<!-- Caja de itinerario -->
-				<div class="card mb-3" style="max-width: 540px;">
+			<div class="col-6">
+				<div class="card sm-2" style="max-width: 550px;">
 					<c:choose>
 						<c:when test="${usuario.itinerario.atraccionesAceptadas.isEmpty() }">
 							<div class="row g-0">
@@ -68,14 +63,14 @@
 						</c:when>
 						<c:otherwise>
 						<div class="row g-0">
-								<h3 style="padding-bottom: 30px; padding-top:20px">Este es tu itinerario</h3>
+								<h3 style="padding-bottom: 10px; padding-top:10px">Este es tu itinerario</h3>
 							</div>
 						</c:otherwise>
 					</c:choose>
 					<c:forEach items="${usuario.itinerario.atraccionesAceptadas}"
 						var="atraccion">
 						<div class="row g-0">
-							<div class="col-md-4">
+							<div class="col-md-2">
 								<a href ="atraccion.do?id=${atraccion.id}"> <img
 									src="resources/${atraccion.nombre.toLowerCase()}.png"
 									class="img-fluid rounded-start" alt="${atraccion.nombre}">
@@ -96,6 +91,7 @@
 				</div>
 			</div>
 		</div>
+		
 	</main>
 </body>
 

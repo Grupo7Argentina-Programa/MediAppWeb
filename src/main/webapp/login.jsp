@@ -31,7 +31,7 @@
 
 			<div>
 				<h2 style="color: white;">Te damos la bienvenida.</h2>
-				<h2 style="color: white;">Ingresá tu usuario y contraseña.</h2>
+				<h2 style="color: white;">Ingresá tu usuario.</h2>
 			</div>
 
 			<div class="form-floating mb-3">
@@ -39,6 +39,7 @@
 					placeholder="Usuario" autofocus required> <label
 					for="usuario">Usuario</label>
 			</div>
+			<!--  
 			<div class="form-floating mb-3">
 				<input type="password" class="form-control" name="password"
 					placeholder="Password"> <label for="password">Contraseña</label>
@@ -48,6 +49,7 @@
 					value="remember-me"> Recordar usuario
 				</label>
 			</div>
+			-->
 			<div class="navbar-nav ms-auto">
 				<button type="submit" class="btn btn-primary btn-lg"
 					id="submit-login">Iniciar sesión</button>
