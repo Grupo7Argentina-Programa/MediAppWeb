@@ -36,11 +36,12 @@ public class PromocionService {
 		case "Porcentual":
 			promocion = new Porcentual(nombre, descuento, atraccion1, atraccion2);
 			break;
-		default:
-			break;
 		}
-		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
-		promocionDAO.insert(promocion);
+
+		if (promocion.isValid()) {
+			PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+			promocionDAO.insert(promocion);
+		}
 		return promocion;
 	}
 
@@ -59,7 +60,7 @@ public class PromocionService {
 		promocion.setAtraccion4(atraccion4);
 
 		if (promocion.isValid()) {
-			promocionDAO.update(promocion); // XXX: si no devuelve "1", es que hubo más errores
+			promocionDAO.update(promocion);
 		}
 		return promocion;
 	}

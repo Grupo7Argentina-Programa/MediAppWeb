@@ -49,10 +49,10 @@ public class LoginServlet extends HttpServlet {
 				
 			List<Promocion> promociones = promocionService.list();	
 			req.getSession().setAttribute("promociones", promociones);
-			
+					
 			resp.sendRedirect("index.jsp");
 		} else {
-			req.setAttribute("flash", "Nombre de usuario o contraseña incorrectos");
+			req.setAttribute("flash", "Nombre de usuario incorrecto");
 
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 			dispatcher.forward(req, resp);

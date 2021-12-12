@@ -12,8 +12,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Atraccion;
 import model.Promocion;
+import model.TipoDeAtraccion;
 import services.AtraccionService;
 import services.PromocionService;
+import services.TiposDeAtraccionService;
 
 @WebServlet("/alta-promocion.do")
 public class CrearPromocionServlet extends HttpServlet implements Servlet {
@@ -21,12 +23,14 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 4536151054255336101L;
 	private PromocionService promocionService;
 	private AtraccionService atraccionService;
+	private TiposDeAtraccionService tiposDeAtraccionService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		this.promocionService = new PromocionService();
 		this.atraccionService = new AtraccionService();
+		this.tiposDeAtraccionService = new TiposDeAtraccionService();
 	}
 
 	@Override
@@ -34,6 +38,8 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet {
 
 		List<Atraccion> atracciones = atraccionService.list();
 		req.setAttribute("atracciones", atracciones);
+		List<TipoDeAtraccion> tiposDeAtracciones = tiposDeAtraccionService.list();
+		req.setAttribute("tiposDeAtracciones", tiposDeAtracciones);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/alta-promocion.jsp");
 		dispatcher.forward(req, resp);
@@ -59,7 +65,7 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet {
 		} else {
 			req.setAttribute("promocion", promocion);
 
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/alta-promocion.do");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/alta-promocion.jsp");
 			dispatcher.forward(req, resp);
 		}
 

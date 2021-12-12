@@ -52,7 +52,7 @@ public class EditarAtraccionServlet extends HttpServlet implements Servlet {
 		Integer costo = Integer.parseInt(req.getParameter("costo"));
 		Double tiempoRequerido = Double.parseDouble(req.getParameter("tiempoRequerido"));
 		Integer cupo = Integer.parseInt(req.getParameter("cupo"));
-		TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(req.getParameter("tipo").toUpperCase());
+		TipoDeAtraccion tipo = tipoDeAtraccionService.find(req.getParameter("tipo"));
 		String descripcion = req.getParameter("descripcion");
 
 		Atraccion atraccion = atraccionService.update(id, nombre, costo, tiempoRequerido, cupo, tipo, descripcion);

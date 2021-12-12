@@ -11,8 +11,10 @@ import model.NombreInvalido;
 import model.TiempoInvalido;
 import model.Usuario;
 import model.ValorInvalido;
+import persistence.TipoDeAtraccionDAO;
 import persistence.UserDAO;
 import persistence.common.ConnectionProvider;
+import persistence.common.DAOFactory;
 import persistence.common.MissingDataException;
 
 public class UserDAOImpl implements UserDAO {
@@ -26,7 +28,7 @@ public class UserDAOImpl implements UserDAO {
 			statement.setString(1, user.getNombre());
 			statement.setInt(2, user.getPresupuesto());
 			statement.setDouble(3, user.getTiempoDisponible());
-			statement.setString(4, user.getAtraccionFavorita().name().toLowerCase());
+			statement.setString(4, user.getAtraccionFavorita().getNombre());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -164,8 +166,11 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	private Usuario toUser(ResultSet resultados) throws SQLException, NombreInvalido, ValorInvalido, TiempoInvalido {
+		TipoDeAtraccionDAO tipoDeAtraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
+		TipoDeAtraccion tipo = tipoDeAtraccionDAO.findByName(resultados.getString(5));
+		
 		return new Usuario(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getDouble(4),
-				TipoDeAtraccion.valueOf(resultados.getString(5).toUpperCase()), (resultados.getInt(6) == 1) ? true : false);
+				tipo, (resultados.getInt(6) == 1) ? true : false);
 	}
 
 }

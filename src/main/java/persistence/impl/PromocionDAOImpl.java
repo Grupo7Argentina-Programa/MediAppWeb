@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
 import model.Absoluta;
 import model.Atraccion;
 import model.AxB;
@@ -14,7 +14,6 @@ import model.NombreInvalido;
 import model.Porcentual;
 import model.Promocion;
 import model.TiempoInvalido;
-import model.TipoDeAtraccionDistinta;
 import model.ValorInvalido;
 import persistence.AtraccionDAO;
 import persistence.PromocionDAO;
@@ -36,6 +35,8 @@ public class PromocionDAOImpl implements PromocionDAO {
 			while (resultados.next()) {
 				promociones.add(toPromocion(resultados));
 			}
+			Collections.sort(promociones);
+			Collections.reverse(promociones);
 
 			return promociones;
 		} catch (Exception e) {
@@ -44,7 +45,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 	}
 
 	private Promocion toPromocion(ResultSet resultados)
-			throws SQLException, NombreInvalido, ValorInvalido, TiempoInvalido, TipoDeAtraccionDistinta {
+			throws SQLException, NombreInvalido, ValorInvalido, TiempoInvalido {
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		Promocion promo = null;
 		Atraccion atraccion1 = atraccionDAO.findByName(resultados.getString(6));
@@ -103,7 +104,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 			statement.setString(6, promocion.getAtraccion2().getNombre());
 			statement.setString(7, (promocion.getAtraccion3() == null) ? null : promocion.getAtraccion3().getNombre());
 			statement.setString(8, (promocion.getAtraccion4() == null) ? null : promocion.getAtraccion4().getNombre());
-			statement.setString(9, promocion.getTipo().name().toLowerCase());
+			statement.setString(9, promocion.getTipo().getNombre());
 			statement.setString(10, promocion.getTipoDePromocion());
 			int rows = statement.executeUpdate();
 
@@ -127,7 +128,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 			statement.setString(6, promocion.getAtraccion2().getNombre());
 			statement.setString(7, (promocion.getAtraccion3() == null) ? null : promocion.getAtraccion3().getNombre());
 			statement.setString(8, (promocion.getAtraccion4() == null) ? null : promocion.getAtraccion4().getNombre());
-			statement.setString(9, promocion.getTipo().name().toLowerCase());
+			statement.setString(9, promocion.getTipo().getNombre());
 			statement.setString(10, promocion.getTipoDePromocion());
 			statement.setInt(11, promocion.getId());
 			int rows = statement.executeUpdate();

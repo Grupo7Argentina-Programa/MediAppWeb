@@ -1,4 +1,4 @@
-package controller.usuario;
+package controller.tipoDeAtraccion;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,57 +11,45 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.TipoDeAtraccion;
-import model.Usuario;
 import services.TiposDeAtraccionService;
-import services.UsuarioService;
 
-@WebServlet("/edit-usuario.do")
-public class EditarUsuarioServlet extends HttpServlet implements Servlet {
+@WebServlet("/alta-tipo-atraccion.do")
+public class CrearTipoDeAtraccionServlet extends HttpServlet implements Servlet {
 
-	private static final long serialVersionUID = -5208044589853752386L;
-	private UsuarioService usuarioService;
+	private static final long serialVersionUID = 5307883558170134976L;
 	private TiposDeAtraccionService tipoDeAtraccionService;
+
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.usuarioService = new UsuarioService();
 		this.tipoDeAtraccionService = new TiposDeAtraccionService();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		Integer id = Integer.parseInt(req.getParameter("id"));
-
-		Usuario usuario = usuarioService.find(id);
-		req.setAttribute("usuario", usuario);
-		
 		List<TipoDeAtraccion> tiposDeAtraccion = tipoDeAtraccionService.list();
 		req.setAttribute("tiposDeAtraccion", tiposDeAtraccion);
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit-usuario.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/alta-tipo-atraccion.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		Integer id = Integer.parseInt(req.getParameter("id"));
 		String nombre = req.getParameter("nombre");
-		Integer presupuesto = Integer.parseInt(req.getParameter("presupuesto"));
-		Double tiempoDisponible = Double.parseDouble(req.getParameter("tiempoDisponible"));
-		TipoDeAtraccion tipo = tipoDeAtraccionService.find(req.getParameter("tipo"));
 
-		Usuario usuario = usuarioService.update(id, nombre, presupuesto, tiempoDisponible, tipo);
-		if (usuario.isValid()) {
-			req.setAttribute("flash", "Usuario actualizado con éxito");
-			resp.sendRedirect("listado-usuarios.do");
+		TipoDeAtraccion tipoDeAtraccion = tipoDeAtraccionService.crear(nombre);
+		if (tipoDeAtraccion.isValid()) {
+			req.setAttribute("flash", "El tipo de atracción fue creada con éxito");
+			resp.sendRedirect("listado-tipos.do");
 		} else {
-			req.setAttribute("usuario", usuario);
+			req.setAttribute("tipo", tipoDeAtraccion);
 
 			RequestDispatcher dispatcher = getServletContext()
-					.getRequestDispatcher("/edit-usuario.jsp");
+					.getRequestDispatcher("/alta-tipo-atraccion.do");
 			dispatcher.forward(req, resp);
 		}
 

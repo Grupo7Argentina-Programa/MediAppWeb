@@ -15,7 +15,7 @@ import services.AtraccionService;
 @WebServlet("/listado-atracciones.do")
 public class ListarAtraccionesServlet2 extends HttpServlet implements Servlet {
 
-	private static final long serialVersionUID = -9191928759998728209L;
+	private static final long serialVersionUID = 1221621228777489176L;
 	private AtraccionService atraccionService;
 
 
@@ -30,7 +30,6 @@ public class ListarAtraccionesServlet2 extends HttpServlet implements Servlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Atraccion> atracciones = atraccionService.list();	
 		req.setAttribute("atracciones", atracciones);
-
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listado-atracciones.jsp");
 		dispatcher.forward(req, resp);

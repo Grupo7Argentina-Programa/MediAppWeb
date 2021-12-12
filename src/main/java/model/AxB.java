@@ -18,6 +18,10 @@ public class AxB extends Promocion {
 			this.atraccion4 = d;
 			this.cantidadDeAtracciones = 4;
 			this.descuento = 0;
+			atracciones.add(a);
+			atracciones.add(b);
+			atracciones.add(c);
+			atracciones.add(d);
 	}
 
 	public AxB(Integer id, String nombreDePromo, Atraccion a, Atraccion b, Atraccion c) {
@@ -32,6 +36,9 @@ public class AxB extends Promocion {
 			this.atraccion3 = c;
 			this.cantidadDeAtracciones = 3;
 			this.descuento = 0;
+			atracciones.add(a);
+			atracciones.add(b);
+			atracciones.add(c);
 	}
 	
 	public AxB(String nombreDePromo, Atraccion a, Atraccion b, Atraccion c, Atraccion d) {
@@ -47,6 +54,11 @@ public class AxB extends Promocion {
 			this.atraccion4 = d;
 			this.cantidadDeAtracciones = 4;
 			this.descuento = 0;
+			atracciones.add(a);
+			atracciones.add(b);
+			atracciones.add(c);
+			atracciones.add(d);
+
 	}
 
 	public AxB(String nombreDePromo, Atraccion a, Atraccion b, Atraccion c){
@@ -60,6 +72,9 @@ public class AxB extends Promocion {
 			this.atraccion3 = c;
 			this.cantidadDeAtracciones = 3;
 			this.descuento = 0;
+			atracciones.add(a);
+			atracciones.add(b);
+			atracciones.add(c);
 	}
 
 	@Override

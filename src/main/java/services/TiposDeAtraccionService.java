@@ -1,12 +1,7 @@
 package services;
 
 import java.util.List;
-import model.Atraccion;
-import model.NombreInvalido;
-import model.TiempoInvalido;
 import model.TipoDeAtraccion;
-import model.ValorInvalido;
-import persistence.AtraccionDAO;
 import persistence.TipoDeAtraccionDAO;
 import persistence.common.DAOFactory;
 
@@ -17,50 +12,50 @@ public class TiposDeAtraccionService {
 	}
 
 	public TipoDeAtraccion crear(Integer id, String nombre) {
-		//No funciona
-		TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(nombre);
+
+		TipoDeAtraccion tipo = new TipoDeAtraccion(id, nombre);
 		TipoDeAtraccionDAO tipoDeAtraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
 		tipoDeAtraccionDAO.insert(tipo);
 		return tipo;
 	}
-	
-	public Atraccion crear(String nombre, Integer costo, Double tiempo, Integer cupo, TipoDeAtraccion tipo,
-			String descripcion) {
-		Atraccion atraccion = new Atraccion(nombre, costo, tiempo, cupo, tipo, descripcion);
-		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-		atraccionDAO.insert(atraccion);
-		return atraccion;
+
+	public TipoDeAtraccion crear(String nombre) {
+
+		TipoDeAtraccion tipo = new TipoDeAtraccion(nombre);
+		TipoDeAtraccionDAO tipoDeAtraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
+		tipoDeAtraccionDAO.insert(tipo);
+		return tipo;
 	}
 
-	public Atraccion update(String nombre, Integer costo, Double duracion, Integer cupo) {
+	public TipoDeAtraccion update(Integer id, String nombre) {
 
-		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-		Atraccion atraccion = atraccionDAO.findByName(nombre);
+		TipoDeAtraccionDAO tipoDeAtraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
+		TipoDeAtraccion tipoDeAtraccion = tipoDeAtraccionDAO.find(id);
 
-		atraccion.setNombre(nombre);
-		atraccion.setCosto(costo);
-		atraccion.setTiempoNecesario(duracion);
-		atraccion.setCupo(cupo);
+		tipoDeAtraccion.setNombre(nombre);
 
-		/*
-		 * if (attraction.isValid()) { attractionDAO.update(attraction); // XXX: si no
-		 * devuelve "1", es que hubo más errores }
-		 */
-		return atraccion;
+		if (tipoDeAtraccion.isValid()) {
+			tipoDeAtraccionDAO.update(tipoDeAtraccion); // XXX: si nodevuelve "1", es que hubo más errores
+		}
+		return tipoDeAtraccion;
 	}
 
-	public void delete(Integer id) throws ValorInvalido, NombreInvalido, TiempoInvalido {
-		Atraccion atraccion = new Atraccion(null, null, null, null, null, null, null);
+	public void delete(Integer id) {
+		TipoDeAtraccion tipoDeAtraccion = new TipoDeAtraccion(-1, "");
 
-		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-		atraccionDAO.delete(atraccion);
+		TipoDeAtraccionDAO tipoDeAtraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
+		tipoDeAtraccion = tipoDeAtraccionDAO.find(id);
+		tipoDeAtraccionDAO.delete(tipoDeAtraccion);
 	}
 
-	public Atraccion find(String nombre) {
-		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-		return atraccionDAO.findByName(nombre);
+	public TipoDeAtraccion find(String nombre) {
+		TipoDeAtraccionDAO tipoDeAtraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
+		return tipoDeAtraccionDAO.findByName(nombre);
 	}
 
-	
+	public TipoDeAtraccion find(Integer id) {
+		TipoDeAtraccionDAO tipoDeAtraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
+		return tipoDeAtraccionDAO.find(id);
+	}
 
 }

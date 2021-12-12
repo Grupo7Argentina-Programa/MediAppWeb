@@ -16,16 +16,22 @@ public class AtraccionService {
 			String descripcion) {
 
 		Atraccion atraccion = new Atraccion(id, nombre, costo, tiempo, cupo, tipo, descripcion);
-		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-		atraccionDAO.insert(atraccion);
+		if (atraccion.isValid()) {
+			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+			atraccionDAO.insert(atraccion);
+		}
 		return atraccion;
 	}
 
 	public Atraccion crear(String nombre, Integer costo, Double tiempo, Integer cupo, TipoDeAtraccion tipo,
 			String descripcion) {
-		Atraccion atraccion = new Atraccion(nombre, costo, tiempo, cupo, tipo, descripcion);
-		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-		atraccionDAO.insert(atraccion);
+
+		Atraccion atraccion = new Atraccion(-1, nombre, costo, tiempo, cupo, tipo, descripcion);
+
+		if (atraccion.isValid()) {
+			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+			atraccionDAO.insert(atraccion);
+		}
 		return atraccion;
 	}
 
@@ -43,7 +49,7 @@ public class AtraccionService {
 		atraccion.setDescripcion(descripcion);
 
 		if (atraccion.isValid()) {
-			atraccionDAO.update(atraccion); // XXX: si no devuelve "1", es que hubo más errores }
+			atraccionDAO.update(atraccion);
 		}
 		return atraccion;
 	}
@@ -51,9 +57,9 @@ public class AtraccionService {
 	public void delete(Integer id) {
 		Atraccion atraccion = new Atraccion(-1, "", 0, 0.0, 0, null, "");
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-		
+
 		atraccion = atraccionDAO.find(id);
-		
+
 		atraccionDAO.delete(atraccion);
 	}
 

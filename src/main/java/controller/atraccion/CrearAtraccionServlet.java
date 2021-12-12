@@ -47,7 +47,7 @@ public class CrearAtraccionServlet extends HttpServlet implements Servlet {
 		Integer costo = Integer.parseInt(req.getParameter("costo"));
 		Double tiempoRequerido = Double.parseDouble(req.getParameter("tiempoRequerido"));
 		Integer cupo = Integer.parseInt(req.getParameter("cupo"));
-		TipoDeAtraccion tipo = TipoDeAtraccion.valueOf(req.getParameter("tipo").toUpperCase());
+		TipoDeAtraccion tipo = tipoDeAtraccionService.find(req.getParameter("tipo"));
 		String descripcion = req.getParameter("descripcion");
 
 		Atraccion atraccion = atraccionService.crear(nombre, costo, tiempoRequerido, cupo, tipo, descripcion);
@@ -58,7 +58,7 @@ public class CrearAtraccionServlet extends HttpServlet implements Servlet {
 			req.setAttribute("atraccion", atraccion);
 
 			RequestDispatcher dispatcher = getServletContext()
-					.getRequestDispatcher("/alta-atraccion.do");
+					.getRequestDispatcher("/alta-atraccion.jsp");
 			dispatcher.forward(req, resp);
 		}
 

@@ -23,10 +23,10 @@ public class ComprarAtraccionService {
 			errors.put("atraccion", "No hay cupo disponible");
 		}
 		if (!usuario.puedeComprar(atraccion)) {
-			errors.put("usuario", "No tienes dinero suficiente");
+			errors.put("usuario", "No tenés dinero suficiente");
 		}
 		if (!usuario.puedeAsistir(atraccion)) {
-			errors.put("usuario", "No tienes tiempo suficiente");
+			errors.put("usuario", "No tenés tiempo suficiente");
 		}
 
 		if (errors.isEmpty()) {

@@ -1,8 +1,10 @@
 package model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import persistence.PromocionDAO;
 import persistence.common.DAOFactory;
@@ -19,9 +21,10 @@ public abstract class Promocion implements Mostrable, Comparable<Promocion> {
 	protected Atraccion atraccion2;
 	protected Atraccion atraccion3;
 	protected Atraccion atraccion4;
+	protected Set<Atraccion> atracciones = new HashSet<Atraccion>();
 	protected Integer cantidadDeAtracciones;
 	protected PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
-	private Map<String, String> errors;
+	protected Map<String, String> errors;
 
 	public Integer getCosto() {
 		return this.costo;
@@ -69,8 +72,7 @@ public abstract class Promocion implements Mostrable, Comparable<Promocion> {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(atraccion1, atraccion2, atraccion3, atraccion4, cantidadDeAtracciones, costo, descuento,
-				nombre, tiempoNecesario, tiposDeAtracciones);
+		return Objects.hash(atraccion1, atraccion2, atraccion3, atraccion4, id, nombre);
 	}
 
 	@Override
@@ -84,10 +86,7 @@ public abstract class Promocion implements Mostrable, Comparable<Promocion> {
 		Promocion other = (Promocion) obj;
 		return Objects.equals(atraccion1, other.atraccion1) && Objects.equals(atraccion2, other.atraccion2)
 				&& Objects.equals(atraccion3, other.atraccion3) && Objects.equals(atraccion4, other.atraccion4)
-				&& cantidadDeAtracciones == other.cantidadDeAtracciones && Objects.equals(costo, other.costo)
-				&& descuento == other.descuento && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(tiempoNecesario, other.tiempoNecesario)
-				&& tiposDeAtracciones == other.tiposDeAtracciones;
+				&& Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre);
 	}
 
 	public int getDescuento() {
@@ -150,14 +149,14 @@ public abstract class Promocion implements Mostrable, Comparable<Promocion> {
 	private void validate() {
 		errors = new HashMap<String, String>();
 
-		if (this.costo < 0) {
+		if (this.costo != null && this.costo < 0) {
 			errors.put("costo", "Debe ser positivo");
 		}
-		if (this.descuento < 0) {
-			errors.put("descuento realizado", "Debe ser positivo");
+		if (this.descuento != null && this.descuento < 0) {
+			errors.put("descuento", "Debe ser positivo");
 		}
-		if (this.atraccion1.getTipo() != this.atraccion2.getTipo()) {
-			errors.put("tipo de atraccion", "Debe ser el mismo");
+		if (!this.atraccion1.getTipo().equals(this.atraccion2.getTipo())) {
+		errors.put("tipoDeAtraccion", "Debe ser el mismo");
 		}
 
 	}
@@ -185,4 +184,7 @@ public abstract class Promocion implements Mostrable, Comparable<Promocion> {
 				this.atraccion4 != null ? this.atraccion4.getCupo() >= i : true;
 	}
 
+	public Set<Atraccion> getAtracciones() {
+		return atracciones;
+	}
 }

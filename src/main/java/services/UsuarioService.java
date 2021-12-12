@@ -32,7 +32,7 @@ public class UsuarioService {
 		usuario.setAtraccionFavorita(tipo);
 
 		if (usuario.isValid()) {
-			userDAO.update(usuario); // XXX: si no devuelve "1", es que hubo más errores
+			userDAO.update(usuario);
 		}
 
 		return usuario;

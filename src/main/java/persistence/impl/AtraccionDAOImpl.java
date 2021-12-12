@@ -10,7 +10,9 @@ import java.util.List;
 import model.TipoDeAtraccion;
 import model.Atraccion;
 import persistence.AtraccionDAO;
+import persistence.TipoDeAtraccionDAO;
 import persistence.common.ConnectionProvider;
+import persistence.common.DAOFactory;
 import persistence.common.MissingDataException;
 
 public class AtraccionDAOImpl implements AtraccionDAO {
@@ -36,9 +38,13 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	}
 
 	private Atraccion toAtraccion(ResultSet resultados) throws SQLException {
+		TipoDeAtraccionDAO tipoDeAtraccionDAO = DAOFactory.getTipoDeAtraccionDAO();
+		TipoDeAtraccion tipo = tipoDeAtraccionDAO.findByName(resultados.getString(6));
+		
+		
 		return new Atraccion(resultados.getInt(1), resultados.getString(2), resultados.getInt(3),
 				resultados.getDouble(4), resultados.getInt(5),
-				TipoDeAtraccion.valueOf(resultados.getString(6).toUpperCase()), resultados.getString(7));
+				tipo, resultados.getString(7));
 	}
 
 	@Override
@@ -70,7 +76,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setInt(2, atraccion.getCosto());
 			statement.setDouble(3, atraccion.getTiempoNecesario());
 			statement.setInt(4, atraccion.getCupo());
-			statement.setString(5, atraccion.getTipo().name().toLowerCase());
+			statement.setString(5, atraccion.getTipo().getNombre());
 			statement.setString(6, atraccion.getDescripcion());
 			int rows = statement.executeUpdate();
 
@@ -90,7 +96,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			statement.setString(1, atraccion.getNombre());
 			statement.setInt(2, atraccion.getCosto());
 			statement.setDouble(3, atraccion.getTiempoNecesario());
-			statement.setString(4, atraccion.getTipo().name().toLowerCase());
+			statement.setString(4, atraccion.getTipo().getNombre());
 			statement.setInt(5, atraccion.getCupo());
 			statement.setString(6, atraccion.getDescripcion());
 			statement.setInt(7, atraccion.getId());
