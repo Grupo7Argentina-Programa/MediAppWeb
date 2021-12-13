@@ -28,6 +28,13 @@
 				</div>
 			</c:if>
 			<c:if test="${usuario.isAdmin()}">
+			
+			</a>
+				<a href="alta-tipo-atraccion.do" class="button" type="button"
+					style="padding-bottom: 3px">
+					<button class="btn btn-primary" type="button">Crear
+						tipo de atracción</button>
+				</a>
 				<table class="table table-dark table-hover">
 					<thead>
 						<tr>

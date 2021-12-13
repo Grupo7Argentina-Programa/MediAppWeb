@@ -15,6 +15,13 @@
 	style="background-color: #000000; padding-top: 140px;">
 
 	<main class="container-fluid" style="padding-bottom: 30px;">
+	
+		<c:if test="${usuario == null}">
+		<div>
+			<img class="img-fluid" alt="bienvenida" src="resources/bienvenida-index.jpg">
+		</div>
+		</c:if>
+
 
 		<c:if test="${usuario != null}">
 			<h1 style="color: white; text-align: center">
@@ -108,9 +115,11 @@
 											<div class="btn-group">
 												<a href="atraccion.do?id=${atraccion.id}"
 													class="btn btn-success rounded" role="button">Ver</a>
-												<button type="button"
+												<!-- 
+											 	<button type="button"
 													class="btn btn-sm btn-outline-secondary">Añadir al
 													carrito</button>
+											 -->
 											</div>
 										</div>
 									</c:if>

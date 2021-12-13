@@ -26,7 +26,7 @@
 				<c:if
 					test="${usuario.puedeComprar(atraccion) &&
 														usuario.puedeAsistir(atraccion) &&
-														!usuario.enItinerario(atraccion) &&
+														!atraccion.estaEnItinerario(usuario.itinerario)		 &&
 														usuario.atraccionFavorita ==atraccion.tipo}">
 					<div class="col">
 						<div class="card h-100">
@@ -55,8 +55,10 @@
 									<div class="btn-group">
 										<a href="atraccion.do?id=${atraccion.id}"
 											class="btn btn-success rounded" role="button">Ver</a>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
+									<!-- 
+									 	<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
 											al carrito</button>
+									 -->
 									</div>
 								</div>
 							</div>
@@ -68,7 +70,7 @@
 				<c:if
 					test="${usuario.puedeComprar(atraccion) &&
 														usuario.puedeAsistir(atraccion) &&
-														!usuario.enItinerario(atraccion) &&
+														!atraccion.estaEnItinerario(usuario.itinerario) &&
 														usuario.atraccionFavorita !=atraccion.tipo}">
 					<div class="col">
 						<div class="card h-100">
@@ -97,8 +99,10 @@
 									<div class="btn-group">
 										<a href="atraccion.do?id=${atraccion.id}"
 											class="btn btn-success rounded" role="button">Ver</a>
+										<!--
 										<button type="button" class="btn btn-sm btn-outline-secondary">Añadir
 											al carrito</button>
+										  -->
 									</div>
 								</div>
 							</div>

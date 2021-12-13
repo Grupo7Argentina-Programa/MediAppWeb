@@ -38,7 +38,9 @@
 						<h5 class="card-title">
 							<c:out value="${usuario.nombre}"></c:out>
 						</h5>
-						<p class="card-text">Hola, soy una descripción</p>
+						<!-- 
+						 <p class="card-text">Hola, soy una descripción</p>
+						 -->
 					</div>
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item"><c:out

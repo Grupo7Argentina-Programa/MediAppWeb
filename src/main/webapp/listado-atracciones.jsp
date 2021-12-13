@@ -35,12 +35,8 @@
 					<button class="btn btn-primary" type="button">Crear
 						atracción</button>
 				</a>
-				<a href="alta-tipo-atraccion.do" class="button" type="button"
-					style="padding-bottom: 3px">
-					<button class="btn btn-primary" type="button">Crear
-						tipo de atracción</button>
-				</a>
-				<table class="table table-dark table-hover">
+				<div style="overflow: scroll;max-height:460px;">
+				<table class="table table-dark table-hover-responsive">
 					<thead>
 						<tr>
 							<th scope="col">Id</th>
@@ -49,6 +45,7 @@
 							<th scope="col">Duración</th>
 							<th scope="col">Cupo</th>
 							<th scope="col">Tipo de atracción</th>
+							<th scope="col">Posibles acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -57,7 +54,7 @@
 								<c:if test="${usuario.atraccionFavorita.equals(atraccion.tipo)}">
 									<td><c:out value="${atraccion.id}"></c:out></td>
 									<td><strong><c:out value="${atraccion.nombre}"></c:out></strong>
-										<br> <a role="button" class="collapsed"
+										<!--  <br> <a role="button" class="collapsed"
 										data-bs-toggle="collapse"
 										href="#descripcionAtraccion${atraccion.id }"
 										aria-expanded="false"
@@ -76,7 +73,7 @@
 													aria-expanded="false">Le avisan al programador que
 													escriba una descripción, gracias.</p>
 											</c:otherwise>
-										</c:choose></td>
+										</c:choose></td>-->
 									<td>$ <c:out value="${atraccion.costo}"></c:out></td>
 									<td><c:out value="${atraccion.tiempoNecesario}"></c:out>
 										horas</td>
@@ -90,9 +87,9 @@
 											<c:when
 												test="${usuario.puedeComprar(atraccion) &&
 														usuario.puedeAsistir(atraccion) &&
-														!usuario.enItinerario(atraccion)}">
+														!atraccion.estaEnItinerario(usuario.itinerario)}">
 												<a href="comprar-atraccion.do?id=${atraccion.id }"
-													class="btn btn-success rounded" role="button"><i class="bi bi-cart4"></i>Comprar</a>
+													class="btn btn-success rounded" role="button">Comprar</a>
 											</c:when>
 											<c:otherwise>
 												<a href="#" class="btn btn-secondary rounded disabled"
@@ -100,7 +97,7 @@
 											</c:otherwise>
 										</c:choose> <c:if test="${usuario.isAdmin()}">
 											<a href="edit-atraccion.do?id=${atraccion.id}"
-												class="btn btn-light rounded" role="button">Editar<i
+												class="btn btn-light rounded-0" role="button">Editar<i
 												class="bi bi-pencil-fill"></i></a>
 											<a href="delete-atraccion.do?id=${atraccion.id}"
 												class="btn btn-danger rounded" role="button">Borrar<i
@@ -114,7 +111,7 @@
 								<c:if test="${!usuario.atraccionFavorita.equals(atraccion.tipo)}">
 									<td><c:out value="${atraccion.id}"></c:out></td>
 									<td><strong><c:out value="${atraccion.nombre}"></c:out></strong>
-										<br> <a role="button" class="collapsed"
+										<!--  <br> <a role="button" class="collapsed"
 										data-bs-toggle="collapse"
 										href="#descripcionAtraccion${atraccion.id }"
 										aria-expanded="false"
@@ -133,7 +130,7 @@
 													aria-expanded="false">Le avisan al programador que
 													escriba una descripción, gracias.</p>
 											</c:otherwise>
-										</c:choose></td>
+										</c:choose></td> -->
 									<td>$ <c:out value="${atraccion.costo}"></c:out></td>
 									<td><c:out value="${atraccion.tiempoNecesario}"></c:out>
 										horas</td>
@@ -147,7 +144,7 @@
 											<c:when
 												test="${usuario.puedeComprar(atraccion) &&
 														usuario.puedeAsistir(atraccion) &&
-														!usuario.enItinerario(atraccion)}">
+														!atraccion.estaEnItinerario(usuario.itinerario)}">
 												<a href="comprar-atraccion.do?id=${atraccion.id}"
 													class="btn btn-success rounded" role="button">Comprar</a>
 											</c:when>
@@ -157,7 +154,7 @@
 											</c:otherwise>
 										</c:choose> <c:if test="${usuario.isAdmin()}">
 											<a href="edit-atraccion.do?id=${atraccion.id}"
-												class="btn btn-light rounded" role="button">Editar<i
+												class="btn btn-light rounded-0" role="button">Editar<i
 												class="bi bi-pencil-fill"></i></a>
 											<a href="delete-atraccion.do?id=${atraccion.id}"
 												class="btn btn-danger rounded" role="button">Borrar<i
@@ -168,6 +165,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				</div>
 			</c:if>
 		</div>
 	</main>

@@ -109,9 +109,11 @@
 											<a href="promocion.do?id=${promocion.id	}"
 												class="btn btn-success rounded" role="button">Ver<i
 												class="bi bi-pencil-fill"></i></a>
-											<button type="button"
+											<!-- 
+											 <button type="button"
 												class="btn btn-sm btn-outline-secondary">Añadir al
 												carrito</button>
+											 -->
 										</div>
 									</div>
 								</div>
@@ -193,9 +195,11 @@
 											<a href="promocion.do?id=${promocion.id	}"
 												class="btn btn-success rounded" role="button">Ver<i
 												class="bi bi-pencil-fill"></i></a>
-											<button type="button"
+										<!-- 
+										 	<button type="button"
 												class="btn btn-sm btn-outline-secondary">Añadir al
 												carrito</button>
+										 -->
 										</div>
 									</div>
 								</div>

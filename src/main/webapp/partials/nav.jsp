@@ -4,7 +4,7 @@
 	style="background-color: #00000070; font-size: x-large; padding: 30px 10px;">
 	<div class="container-fluid">
 		<a href="index.jsp" id="logo" class="navbar-brand"
-			style="display: contents"> <img src="resources/logo.png"
+			style="display: contents"> <img class="img-fluid" src="resources/logo.png"
 			alt="MediApp" id="imagen-logo" style="height: 70px">
 		</a>
 		<button type="button" class="navbar-toggler" data-bs-toggle="collapse"
@@ -18,13 +18,13 @@
 					href="atracciones.do" class="nav-item nav-link">Atracciones</a> <a
 					href="promociones.do" class="nav-item nav-link">Promociones</a>
 				<c:if test="${usuario.admin}">
-					<div class="dropdown">
+					<div class="dropdown" style="text-align-last: end">
 						<button class="dropbtn">Administrador</button>
-						<div class="dropdown-content">
-							<a style="text-align: end" href="listado-atracciones.do">Atracciones</a>
-							<a style="text-align: end" href="listado-promociones.do">Promociones</a>
-							<a style="text-align: end" href="listado-tipos.do">Tipos de atracción</a>
-							<a style="text-align: end" href="listado-usuarios.do">Usuarios</a>
+						<div class="dropdown-content" style="text-align-last: end">
+							<a class=dropdown-item style="text-align: end" href="listado-atracciones.do">Atracciones</a>
+							<a class=dropdown-item style="text-align: end" href="listado-promociones.do">Promociones</a>
+							<a class=dropdown-item style="text-align: end" href="listado-tipos.do">Tipos de atracción</a>
+							<a class=dropdown-item style="text-align: end" href="listado-usuarios.do">Usuarios</a>
 						</div>
 					</div>
 				</c:if>
